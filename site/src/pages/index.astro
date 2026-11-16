@@ -1,0 +1,263 @@
+---
+import Base from "../layouts/Base.astro";
+import Swap from "../components/Swap.astro";
+import Transfer from "../components/Transfer.astro";
+import Results from "../components/Results.astro";
+import M from "../components/M.astro";
+// Not `meta`: Vite's dev SSR transform confuses that binding with import.meta.
+import paper from "../data/meta.json";
+import hero from "../data/hero.json";
+import transfer from "../data/transfer.json";
+import { links } from "../config.mjs";
+import intro from "../assets/figures/intro-psi.png";
+import encodingFigure from "../assets/figures/encoding-transfer.png";
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+const s = hero.setup;
+const model = s.model.split("/").pop();
+const [mainTitle, subTitle] = paper.title.split(/:\s*/);
+const sections = [
+  { id: "swap", label: ["The", "Swap"] },
+  { id: "method", label: ["The", "Method"] },
+  { id: "transfer", label: ["Position or", "Symbol?"] },
+  { id: "results", label: ["Key", "Numbers"] },
+  { id: "cite", label: ["Cite"] },
+];
+const icons = {
+  paper: "M4 1.5h5.5L13 5v9.5H4zM9.5 1.5V5H13M6 8h5M6 10.5h5",
+  arxiv: "M2.5 13.5 8 2.5l5.5 11M4.5 9.5h7",
+  code: "M5.5 4 1.5 8l4 4M10.5 4l4 4-4 4",
+};
+const buttons = [
+  { key: "paper", label: "Paper" },
+  { key: "arxiv", label: "arXiv" },
+  { key: "code", label: "Code" },
+] as const;
+---
+<Base title={paper.title} description="PSI localizes a causal variable in a frozen language model from the list of answers the variable can produce, with targets read from the model itself.">
+  <header class="topbar">
+    <div class="wrap topbar-inner">
+      <a class="brand" href={`${base}/`} aria-label="Back to the top"><M t={String.raw`\Psi`} /></a>
+      <nav class="overview" aria-label="Sections">
+        <ol>
+          {sections.map((sec) => (
+            <li><a href={`#${sec.id}`} data-section={sec.id}><span class="label">{sec.label.map((l) => <span>{l}</span>)}</span><span class="dot" /></a></li>
+          ))}
+        </ol>
+      </nav>
+      <div class="theme seg" role="group" aria-label="Colour theme">
+        <button type="button" data-theme-choice="light" aria-pressed="false">light</button>
+        <button type="button" data-theme-choice="dark" aria-pressed="true">dark</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="title-block wrap">
+      <h1>{mainTitle}</h1>
+      {subTitle && <p class="subtitle">{subTitle}</p>}
+      <p class="authors">{paper.authors.map((a, i) => <span>{a.name}{i < paper.authors.length - 1 ? ", " : ""}</span>)}</p>
+      <p class="affiliation">{[...new Set(paper.authors.map((a) => a.affiliation))].join(", ")}</p>
+      <div class="links">
+        {buttons.map((b) => (
+          <a class="button" href={links[b.key].href} data-placeholder={String(links[b.key].placeholder)}>
+            <svg viewBox="0 0 16 16" aria-hidden="true"><path d={icons[b.key]} fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" /></svg>
+            {b.label}
+          </a>
+        ))}
+      </div>
+      <p class="tagline">
+        PSI (<M t={String.raw`\Psi`} />) finds the subspace of a frozen language model's activations that carries a variable you
+        name, given only the list of answers that variable can produce. The training targets are the model's own
+        output distributions on random pairs of prompts, so no labels are needed.
+      </p>
+    </section>
+
+    <section class="block hero" id="swap">
+      <div class="wrap">
+        <div class="rule-label">one interchange, on a real pair of test prompts</div>
+        <Swap />
+      </div>
+    </section>
+
+    <section class="block" id="method">
+      <div class="wrap">
+        <h2 class="slide-title">From an Answer List to a Subspace</h2>
+        <p class="slide-sub">The investigator writes the first step. The frozen model supplies everything numerical.</p>
+        <ol class="method-steps">
+          <li>
+            <div class="step-head"><span class="step-num">1.</span><h3>Declare the answer list</h3></div>
+            <p>A semantic program lists the answers the variable can produce and the rule an interchange should
+            follow. For the position of the correct option, the library is the prompt's own option labels and the rule
+            is the full swap: the base should read as the source does.</p>
+            <M display t={String.raw`\mathcal{P} = (\mathcal{O}, \mathcal{T})`} />
+            <M display t={String.raw`\mathcal{O}(\mathbf{x}) = \big(o_1(\mathbf{x}), \dots, o_k(\mathbf{x})\big)`} />
+            <M display t={String.raw`\btau = \mathcal{T}\big(q(\mathbf{s}), q(\mathbf{b}), \gamma\big) = q(\mathbf{s})`} />
+            <p class="note donor-ink small">no correct answer, no annotated pair, no executable model</p>
+          </li>
+          <li>
+            <div class="step-head"><span class="step-num">2.</span><h3>Read the targets from the frozen model</h3></div>
+            <p>Pair prompts at random. The model's log-probability on each declared answer, renormalised over the
+            library, is its reading of the variable. The target for a pair is the source's reading, so nobody writes a
+            counterfactual answer.</p>
+            <M display t={String.raw`\rho_i(\mathbf{x}) = \log p_\phi\big(o_i(\mathbf{x}) \mid \mathbf{x}\big)`} />
+            <M display t={String.raw`q_i(\mathbf{x}) = \frac{e^{\rho_i(\mathbf{x})}}{Z(\mathbf{x})}, \qquad Z(\mathbf{x}) = \sum_{i=1}^{k} e^{\rho_i(\mathbf{x})}`} />
+            <p class="note recipient-ink small">the reading <M t={String.raw`q`} /> is the model's opinion about the variable</p>
+          </li>
+          <li>
+            <div class="step-head"><span class="step-num">3.</span><h3>Train the subspace</h3></div>
+            <p>Learn an orthonormal basis <M t={String.raw`A`} /> at one layer and token, with projector <M t={String.raw`\bpi`} />. The
+            interchange keeps the base outside the subspace and takes the source inside it; training brings the
+            edited model's reading to the target.</p>
+            <M display t={String.raw`\bh_{b \leftarrow s} = \bpi\, \bh_s + (\mathrm{I} - \bpi)\, \bh_b`} />
+            <M display t={String.raw`\mathcal{L}_{\mathrm{donor}}(A) = \mathbb{E}_{\mathbf{b},\mathbf{s}}\; d\big(\rho(\bh_{b \leftarrow s}),\, \btau(\mathbf{b}, \mathbf{s})\big)`} />
+            <p class="note psi-ink small">base <M t={String.raw`\mathbf{b}`} /> is the recipient, source <M t={String.raw`\mathbf{s}`} /> the donor</p>
+          </li>
+        </ol>
+        <figure class="paper-figure method-figure">
+          <img src={intro.src} width={intro.width} height={intro.height} loading="lazy"
+            alt="Paper Figure 1. Left: a base and a source prompt read at layer l_k, where the abstraction selects the carrier, with bar charts of the model's probabilities on the declared answers. Right: readings as points in a simplex; the interchange moves the base's reading towards the source's, and the same target can be requested with no donor." />
+          <figcaption>Figure 1 of the paper. (a) The declared answers and the frozen model's probability on each,
+          read at the layer where the subspace sits. (b) A reading is a point in the simplex over the answers. The
+          interchange should move the base's reading to <M t={String.raw`\btau(\mathbf{b}, \mathbf{s})`} />, and the remaining
+          distance <M t={String.raw`d`} /> is the training signal. The same target can be requested directly as
+          <M t={String.raw`q^\star`} />, with no donor.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="block" id="transfer">
+      <div class="wrap">
+        <h2 class="slide-title">Position or Symbol?</h2>
+        <p class="slide-sub">The <M t={String.raw`\Psi`} /> subspace for the answer position was trained with capital-letter
+        labels. Frozen, it now swaps answers between prompts labelled differently. If it carries the position, the
+        recipient answers with <em>its own</em> label at the donor's position.</p>
+        <Transfer />
+        <p class="small muted transfer-setup">{model}, layer {s.layer}, last token, rank {s.rank}. Greedy decoding,
+        exact case-sensitive label, {transfer.pairs.display} test pairs, unweighted mean over the three
+        counterfactual families.</p>
+        <details class="paper-details">
+          <summary>The paper's figure, with the argmax-target and DAS subspaces beside <M t={String.raw`\Psi`} /></summary>
+          <figure class="paper-figure on-white">
+            <img src={encodingFigure.src} width={encodingFigure.width} height={encodingFigure.height} loading="lazy"
+              alt="Paper appendix figure: three 4 by 4 heat maps of transfer rate by donor and recipient encoding, for Psi, the argmax target and DAS, each with a strip of the unedited model's accuracy per recipient encoding." />
+            <figcaption>Appendix figure of the paper. Rows are donor encodings, columns recipient encodings; the strip
+            above each map is the unedited model's accuracy with the recipient's labels.</figcaption>
+          </figure>
+        </details>
+      </div>
+    </section>
+
+    <section class="block" id="results">
+      <div class="wrap">
+        <h2 class="slide-title">Key Numbers</h2>
+        <p class="slide-sub">Each value is exported from the experiments reported in the paper.</p>
+        <Results />
+      </div>
+    </section>
+
+    <section class="block cite" id="cite">
+      <div class="wrap narrow">
+        <h2 class="slide-title">BibTeX</h2>
+        <p class="slide-sub">If this is useful in your work, please cite</p>
+        <div class="bibtex">
+          <button class="button copy" type="button">copy</button>
+          <pre><code>{paper.bibtex}</code></pre>
+        </div>
+      </div>
+    </section>
+  </main>
+
+</Base>
+
+<script>
+  const root = document.documentElement;
+  const choices = document.querySelectorAll<HTMLButtonElement>("[data-theme-choice]");
+  const sync = () => choices.forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.themeChoice === root.dataset.theme)));
+  choices.forEach((b) => b.addEventListener("click", () => {
+    root.dataset.theme = b.dataset.themeChoice!;
+    try { localStorage.setItem("psi-theme", b.dataset.themeChoice!); } catch (e) {}
+    sync();
+  }));
+  sync();
+
+  // Overview timeline: the dot of the section in view is filled.
+  const marks = new Map([...document.querySelectorAll<HTMLAnchorElement>(".overview a")].map((a) => [a.dataset.section!, a]));
+  const seen = new Map<string, number>();
+  const spy = new IntersectionObserver((entries) => {
+    for (const e of entries) seen.set(e.target.id, e.isIntersecting ? e.intersectionRatio : 0);
+    let best = "", top = 0;
+    for (const [id, r] of seen) if (r > top) { top = r; best = id; }
+    marks.forEach((a, id) => a.classList.toggle("current", id === best));
+  }, { threshold: [0, 0.1, 0.25, 0.5, 0.75, 1], rootMargin: "-70px 0px -30% 0px" });
+  marks.forEach((_, id) => { const el = document.getElementById(id); if (el) spy.observe(el); });
+
+  document.querySelector(".copy")?.addEventListener("click", async (event) => {
+    const target = event.currentTarget as HTMLButtonElement;
+    const text = document.querySelector(".bibtex code")!.textContent ?? "";
+    try { await navigator.clipboard.writeText(text); target.textContent = "copied"; }
+    catch (e) { target.textContent = "select and copy"; }
+    setTimeout(() => (target.textContent = "copy"), 1600);
+  });
+
+  document.querySelectorAll<HTMLAnchorElement>('a[data-placeholder="true"]').forEach((a) =>
+    a.addEventListener("click", (e) => e.preventDefault()));
+</script>
+
+<style>
+  .topbar { position: sticky; top: 0; z-index: 10; background: var(--bg); border-bottom: 1px solid var(--rule); }
+  .topbar-inner { display: flex; align-items: center; justify-content: space-between; gap: 16px; height: 64px; }
+  .brand { font-size: 1.5rem; text-decoration: none; color: var(--psi-ink); width: 3.2rem; }
+  .theme { flex: none; }
+  .theme button { font-size: 0.85rem; padding: 0.15rem 0.6rem; }
+
+  .overview { flex: 1; max-width: 640px; }
+  .overview ol { list-style: none; margin: 0; padding: 0; display: flex; justify-content: space-between; position: relative; }
+  .overview ol::before { content: ""; position: absolute; left: 10%; right: 10%; bottom: 5px; height: 1px; background: var(--ink-soft); }
+  .overview li { flex: 1; text-align: center; position: relative; }
+  .overview a { display: flex; flex-direction: column; align-items: center; gap: 4px; text-decoration: none; color: var(--ink-soft); font-size: 0.8rem; line-height: 1.15; }
+  .overview .label { display: flex; flex-direction: column; min-height: 1.85rem; justify-content: flex-end; }
+  .overview .dot { width: 11px; height: 11px; border-radius: 50%; background: var(--bg); border: 1.5px solid var(--ink-soft); position: relative; transition: background-color 0.2s ease, border-color 0.2s ease; }
+  .overview a:hover { color: var(--ink); }
+  .overview a.current { color: var(--ink); }
+  .overview a.current .dot { background: var(--psi); border-color: var(--psi); }
+
+  .title-block { text-align: center; padding-top: 64px; padding-bottom: 12px; }
+  h1 { font-size: clamp(2.1rem, 5.2vw, 3.6rem); letter-spacing: 0.005em; }
+  .subtitle { font-size: clamp(1.15rem, 2.2vw, 1.5rem); margin: 0.6rem auto 1.6rem; max-width: 900px; }
+  .authors { font-size: 1.15rem; margin: 0; }
+  .affiliation { color: var(--ink-soft); font-style: italic; margin: 0.1rem 0 1.5rem; }
+  .links { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-bottom: 2.2rem; }
+  .tagline { max-width: 760px; margin: 0 auto; color: var(--ink-soft); font-size: 1.15rem; }
+  .hero { padding-top: 24px; }
+
+  .method-steps { list-style: none; padding: 0; margin: 0 0 3rem; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 36px; }
+  .step-head { display: flex; align-items: baseline; gap: 0.55rem; margin-bottom: 0.55rem; }
+  .step-num { font-size: 1.6rem; color: var(--psi-ink); }
+  .method-steps h3 { font-size: 1.28rem; }
+  .method-steps p { color: var(--ink-soft); margin-bottom: 0.4rem; }
+  .method-steps .note { margin-top: 0.3rem; }
+  .method-steps :global(.katex-display) { font-size: 0.95em; margin: 0.45em 0; }
+  .method-figure { max-width: 1000px; margin: 0 auto; }
+
+  .transfer-setup { margin-top: 1.6rem; }
+  .paper-details { margin-top: 1.4rem; }
+  .paper-details summary { cursor: pointer; color: var(--ink-soft); }
+  .paper-details figure { margin-top: 1rem; max-width: 920px; }
+
+  .cite { padding-bottom: 96px; }
+  .bibtex { position: relative; }
+  .bibtex pre { border: 1px solid var(--rule-strong); border-radius: 2px; padding: 20px; overflow-x: auto; font-size: 0.9rem; line-height: 1.5; margin: 0; }
+  .bibtex .copy { position: absolute; top: 10px; right: 10px; font-size: 0.85rem; padding: 0.1rem 0.6rem; background: var(--bg); }
+
+  @media (max-width: 860px) {
+    .method-steps { grid-template-columns: minmax(0, 1fr); gap: 28px; }
+  }
+  @media (max-width: 640px) {
+    .topbar { position: static; }
+    .topbar-inner { flex-wrap: wrap; height: auto; padding-top: 10px; padding-bottom: 10px; row-gap: 8px; }
+    .overview { order: 3; flex-basis: 100%; }
+    .overview a { font-size: 0.7rem; }
+    .title-block { padding-top: 36px; }
+  }
+</style>

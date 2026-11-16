@@ -1,0 +1,30 @@
+{
+ "ours": [
+  "#A03BB8",
+  "#BA55D3",
+  "#CD82DF"
+ ],
+ "frozen": [
+  "#1E8158",
+  "#3AAC79",
+  "#6DC79F"
+ ],
+ "reference": "#7593C6",
+ "trivial": "#BFBFBC",
+ "ink": [
+  "#0b0b0b",
+  "#4a4a47",
+  "#8a8983"
+ ],
+ "sequential": [
+  "#f3f1f6",
+  "#e3dbec",
+  "#d3c5e2",
+  "#c1abd7",
+  "#ab8ac8",
+  "#9569ba",
+  "#7d4fa3",
+  "#633989",
+  "#4b2370"
+ ]
+}

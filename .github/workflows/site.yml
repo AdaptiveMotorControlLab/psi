@@ -1,0 +1,49 @@
+# Build site/ (Astro, static) and publish it to GitHub Pages.
+#
+# Not enabled: it runs only when started by hand from the Actions tab. To
+# publish on every push to main, add the `push` trigger below and set
+# Settings -> Pages -> Source to "GitHub Actions". The page's data is
+# committed under site/src/data, exported from the experiments reported in the
+# paper, so this job only needs Node.
+name: project-page
+
+on:
+  workflow_dispatch:
+  # push:
+  #   branches: [main]
+  #   paths: ["site/**"]
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      # https://<owner>.github.io/<repository>/ ; set SITE_BASE to "/" for a custom domain.
+      SITE_URL: https://${{ github.repository_owner }}.github.io
+      SITE_BASE: /${{ github.event.repository.name }}
+      ASTRO_TELEMETRY_DISABLED: "1"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: withastro/action@v3
+        with:
+          path: site
+          node-version: 22
+          package-manager: npm
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

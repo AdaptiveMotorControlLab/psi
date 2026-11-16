@@ -1,0 +1,97 @@
+{
+ "parity": {
+  "psi": {
+   "value": 0.9023595023595024,
+   "display": "90.24"
+  },
+  "psi_sd": {
+   "value": 0.005201353776483126,
+   "display": "0.52"
+  },
+  "das": {
+   "value": 0.917031317031317,
+   "display": "91.70"
+  },
+  "das_sd": {
+   "value": 0.009267600857652767,
+   "display": "0.93"
+  },
+  "pairs": {
+   "value": 122,
+   "display": "122"
+  },
+  "updates": {
+   "value": 768,
+   "display": "768"
+  },
+  "gap_pairs": {
+   "value": 1.6666666666666656,
+   "display": "1.7"
+  },
+  "seeds": 3
+ },
+ "no_gold": {
+  "unfiltered": {
+   "value": 0.8933504933504933,
+   "display": "89.34"
+  },
+  "filtered": {
+   "value": 0.9023595023595024,
+   "display": "90.24"
+  },
+  "drop": {
+   "value": 0.009009009009009028,
+   "display": "0.9"
+  }
+ },
+ "arc": {
+  "arms": {
+   "soft": {
+    "value": 0.8588588588588589,
+    "display": "85.9"
+   },
+   "confidence": {
+    "value": 0.8468468468468469,
+    "display": "84.7"
+   },
+   "hard": {
+    "value": 0.7927927927927928,
+    "display": "79.3"
+   },
+   "gold": {
+    "value": 0.7207207207207207,
+    "display": "72.1"
+   },
+   "no_edit": {
+    "value": 0.3063063063063063,
+    "display": "30.6"
+   }
+  },
+  "wrong_donors": {
+   "value": 111,
+   "display": "111"
+  },
+  "pairs": {
+   "value": 589,
+   "display": "589"
+  }
+ },
+ "control": {
+  "joint_conditional": {
+   "value": 0.9479166666666666,
+   "display": "94.8"
+  },
+  "frozen_das": {
+   "value": 0.8170572916666666,
+   "display": "81.7"
+  },
+  "frozen_random1": {
+   "value": 0.3424479166666667,
+   "display": "34.2"
+  },
+  "donor": {
+   "value": 0.87890625,
+   "display": "87.9"
+  }
+ }
+}

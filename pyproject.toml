@@ -1,0 +1,40 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "psi"
+version = "0.1.0"
+description = "Programmable Semantic Interventions: learn causal carriers in frozen language models from behavioral programs"
+readme = "README.md"
+requires-python = ">=3.11"
+license = {file = "LICENSE"}
+authors = [
+    {name = "Paolo Muratore"},
+    {name = "Mackenzie Weygandt Mathis"},
+]
+dependencies = [
+    "torch>=2.9",
+    "lightning>=2.4",
+    "transformers>=5",
+    "accelerate",
+    "datasets",
+    "einops",
+    "pyyaml",
+]
+
+[project.optional-dependencies]
+dev = ["pytest"]
+
+[project.scripts]
+psi-train = "psi.train:main"
+
+[project.urls]
+Repository = "https://github.com/AdaptiveMotorControlLab/psi"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["psi*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

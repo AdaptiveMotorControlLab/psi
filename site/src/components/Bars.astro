@@ -1,0 +1,52 @@
+---
+// A small horizontal bar chart drawn at build time. Bars start at zero so a
+// one-point gap looks like one point.
+interface Row { label: string; value: number; display: string; tone: "psi" | "psi-soft" | "neutral" | "trivial"; sd?: number }
+interface Props { rows: Row[]; reference?: { value: number; label: string }; title: string }
+const { rows, reference, title } = Astro.props;
+const W = 320, labelW = 104, valueW = 40, rowH = 22, top = reference ? 16 : 4;
+const x = (v: number) => labelW + (W - labelW - valueW) * v;
+const H = top + rows.length * rowH + 16;
+---
+<svg class="minibars" viewBox={`0 0 ${W} ${H}`} role="img" aria-label={title}>
+  <title>{title}</title>
+  {[0, 0.5, 1].map((t) => (
+    <g>
+      <line x1={x(t)} x2={x(t)} y1={top - 2} y2={top + rows.length * rowH} class="grid" />
+      <text x={x(t)} y={H - 3} class="tick" text-anchor="middle">{Math.round(100 * t)}</text>
+    </g>
+  ))}
+  {rows.map((r, i) => {
+    const y = top + i * rowH;
+    return (
+      <g>
+        <text x={labelW - 8} y={y + rowH / 2 + 4} class="row-label" text-anchor="end">{r.label}</text>
+        <rect x={x(0)} y={y + 4} width={x(r.value) - x(0)} height={rowH - 8} class={`bar-${r.tone}`} />
+        {r.sd ? <line x1={x(r.value - r.sd)} x2={x(r.value + r.sd)} y1={y + rowH / 2} y2={y + rowH / 2} class="whisker" /> : null}
+        <text x={x(r.value) + 5} y={y + rowH / 2 + 4} class="value">{r.display}</text>
+      </g>
+    );
+  })}
+  {reference && (
+    <g>
+      <line x1={x(reference.value)} x2={x(reference.value)} y1={top - 6} y2={top + rows.length * rowH} class="reference" />
+      <text x={x(reference.value)} y={top - 8} class="reference-label" text-anchor="middle">{reference.label}</text>
+    </g>
+  )}
+</svg>
+
+<style is:global>
+  .minibars { display: block; width: 100%; max-width: 440px; height: auto; margin: 18px auto 0; }
+  .minibars text { font-family: var(--serif); }
+  .minibars .grid { stroke: var(--rule); stroke-width: 0.8; }
+  .minibars .tick { font-size: 9.5px; fill: var(--ink-muted); }
+  .minibars .row-label { font-size: 11px; font-style: italic; fill: var(--ink-soft); }
+  .minibars .value { font-size: 11px; fill: var(--ink); }
+  .minibars .bar-psi { fill: var(--psi); }
+  .minibars .bar-psi-soft { fill: var(--psi); opacity: 0.5; }
+  .minibars .bar-neutral { fill: var(--ink-soft); }
+  .minibars .bar-trivial { fill: var(--trivial); }
+  .minibars .whisker { stroke: var(--ink); stroke-width: 1.1; }
+  .minibars .reference { stroke: var(--recipient); stroke-width: 1.3; stroke-dasharray: 3 2; }
+  .minibars .reference-label { font-size: 10px; font-style: italic; fill: var(--recipient-ink); }
+</style>

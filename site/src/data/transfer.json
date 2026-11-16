@@ -1,0 +1,3101 @@
+{
+ "encodings": [
+  {
+   "key": "original",
+   "label": "A–Z"
+  },
+  {
+   "key": "lowercase",
+   "label": "a–d"
+  },
+  {
+   "key": "digits",
+   "label": "1–4"
+  },
+  {
+   "key": "permuted_digits",
+   "label": "perm. 1–4"
+  }
+ ],
+ "grid": {
+  "no_edit": {
+   "original|original": {
+    "value": 0.3333333333333333,
+    "display": "33.3",
+    "sd": null
+   },
+   "original|digits": {
+    "value": 0.32,
+    "display": "32.0",
+    "sd": null
+   },
+   "original|lowercase": {
+    "value": 0.3333333333333333,
+    "display": "33.3",
+    "sd": null
+   },
+   "original|permuted_digits": {
+    "value": 0.32666666666666666,
+    "display": "32.7",
+    "sd": null
+   },
+   "digits|original": {
+    "value": 0.3333333333333333,
+    "display": "33.3",
+    "sd": null
+   },
+   "digits|digits": {
+    "value": 0.32,
+    "display": "32.0",
+    "sd": null
+   },
+   "digits|lowercase": {
+    "value": 0.3333333333333333,
+    "display": "33.3",
+    "sd": null
+   },
+   "digits|permuted_digits": {
+    "value": 0.32666666666666666,
+    "display": "32.7",
+    "sd": null
+   },
+   "lowercase|original": {
+    "value": 0.3333333333333333,
+    "display": "33.3",
+    "sd": null
+   },
+   "lowercase|digits": {
+    "value": 0.32,
+    "display": "32.0",
+    "sd": null
+   },
+   "lowercase|lowercase": {
+    "value": 0.3333333333333333,
+    "display": "33.3",
+    "sd": null
+   },
+   "lowercase|permuted_digits": {
+    "value": 0.32666666666666666,
+    "display": "32.7",
+    "sd": null
+   },
+   "permuted_digits|original": {
+    "value": 0.3333333333333333,
+    "display": "33.3",
+    "sd": null
+   },
+   "permuted_digits|digits": {
+    "value": 0.32,
+    "display": "32.0",
+    "sd": null
+   },
+   "permuted_digits|lowercase": {
+    "value": 0.3333333333333333,
+    "display": "33.3",
+    "sd": null
+   },
+   "permuted_digits|permuted_digits": {
+    "value": 0.32666666666666666,
+    "display": "32.7",
+    "sd": null
+   }
+  },
+  "full_copy": {
+   "original|original": {
+    "value": 0.7533333333333333,
+    "display": "75.3",
+    "sd": null
+   },
+   "original|digits": {
+    "value": 0.07333333333333333,
+    "display": "7.3",
+    "sd": null
+   },
+   "original|lowercase": {
+    "value": 0.6266666666666666,
+    "display": "62.7",
+    "sd": null
+   },
+   "original|permuted_digits": {
+    "value": 0.1466666666666667,
+    "display": "14.7",
+    "sd": null
+   },
+   "digits|original": {
+    "value": 0.86,
+    "display": "86.0",
+    "sd": null
+   },
+   "digits|digits": {
+    "value": 0.49333333333333335,
+    "display": "49.3",
+    "sd": null
+   },
+   "digits|lowercase": {
+    "value": 0.7933333333333333,
+    "display": "79.3",
+    "sd": null
+   },
+   "digits|permuted_digits": {
+    "value": 0.28,
+    "display": "28.0",
+    "sd": null
+   },
+   "lowercase|original": {
+    "value": 1.0,
+    "display": "100.0",
+    "sd": null
+   },
+   "lowercase|digits": {
+    "value": 0.04666666666666667,
+    "display": "4.7",
+    "sd": null
+   },
+   "lowercase|lowercase": {
+    "value": 1.0,
+    "display": "100.0",
+    "sd": null
+   },
+   "lowercase|permuted_digits": {
+    "value": 0.08666666666666667,
+    "display": "8.7",
+    "sd": null
+   },
+   "permuted_digits|original": {
+    "value": 0.48666666666666664,
+    "display": "48.7",
+    "sd": null
+   },
+   "permuted_digits|digits": {
+    "value": 0.3666666666666667,
+    "display": "36.7",
+    "sd": null
+   },
+   "permuted_digits|lowercase": {
+    "value": 0.4466666666666667,
+    "display": "44.7",
+    "sd": null
+   },
+   "permuted_digits|permuted_digits": {
+    "value": 0.3466666666666667,
+    "display": "34.7",
+    "sd": null
+   }
+  },
+  "random": {
+   "original|original": {
+    "value": 0.3333333333333333,
+    "display": "33.3",
+    "sd": null
+   },
+   "original|digits": {
+    "value": 0.32,
+    "display": "32.0",
+    "sd": null
+   },
+   "original|lowercase": {
+    "value": 0.3333333333333333,
+    "display": "33.3",
+    "sd": null
+   },
+   "original|permuted_digits": {
+    "value": 0.32,
+    "display": "32.0",
+    "sd": null
+   },
+   "digits|original": {
+    "value": 0.3333333333333333,
+    "display": "33.3",
+    "sd": null
+   },
+   "digits|digits": {
+    "value": 0.32,
+    "display": "32.0",
+    "sd": null
+   },
+   "digits|lowercase": {
+    "value": 0.3333333333333333,
+    "display": "33.3",
+    "sd": null
+   },
+   "digits|permuted_digits": {
+    "value": 0.32666666666666666,
+    "display": "32.7",
+    "sd": null
+   },
+   "lowercase|original": {
+    "value": 0.3333333333333333,
+    "display": "33.3",
+    "sd": null
+   },
+   "lowercase|digits": {
+    "value": 0.3133333333333333,
+    "display": "31.3",
+    "sd": null
+   },
+   "lowercase|lowercase": {
+    "value": 0.3333333333333333,
+    "display": "33.3",
+    "sd": null
+   },
+   "lowercase|permuted_digits": {
+    "value": 0.32666666666666666,
+    "display": "32.7",
+    "sd": null
+   },
+   "permuted_digits|original": {
+    "value": 0.3333333333333333,
+    "display": "33.3",
+    "sd": null
+   },
+   "permuted_digits|digits": {
+    "value": 0.32,
+    "display": "32.0",
+    "sd": null
+   },
+   "permuted_digits|lowercase": {
+    "value": 0.3333333333333333,
+    "display": "33.3",
+    "sd": null
+   },
+   "permuted_digits|permuted_digits": {
+    "value": 0.32666666666666666,
+    "display": "32.7",
+    "sd": null
+   }
+  },
+  "soft": {
+   "original|original": {
+    "value": 0.8622222222222222,
+    "display": "86.2",
+    "sd": 0.010183501544346328
+   },
+   "original|digits": {
+    "value": 0.45999999999999996,
+    "display": "46.0",
+    "sd": 0.011547005383792526
+   },
+   "original|lowercase": {
+    "value": 0.8688888888888888,
+    "display": "86.9",
+    "sd": 0.010183501544346255
+   },
+   "original|permuted_digits": {
+    "value": 0.3511111111111111,
+    "display": "35.1",
+    "sd": 0.003849001794597498
+   },
+   "digits|original": {
+    "value": 0.9244444444444444,
+    "display": "92.4",
+    "sd": 0.007698003589194996
+   },
+   "digits|digits": {
+    "value": 0.4533333333333333,
+    "display": "45.3",
+    "sd": 0.0
+   },
+   "digits|lowercase": {
+    "value": 0.9155555555555555,
+    "display": "91.6",
+    "sd": 0.00384900179459753
+   },
+   "digits|permuted_digits": {
+    "value": 0.3666666666666667,
+    "display": "36.7",
+    "sd": 0.006666666666666654
+   },
+   "lowercase|original": {
+    "value": 1.0,
+    "display": "100.0",
+    "sd": 0.0
+   },
+   "lowercase|digits": {
+    "value": 0.47333333333333333,
+    "display": "47.3",
+    "sd": 0.0
+   },
+   "lowercase|lowercase": {
+    "value": 1.0,
+    "display": "100.0",
+    "sd": 0.0
+   },
+   "lowercase|permuted_digits": {
+    "value": 0.3777777777777778,
+    "display": "37.8",
+    "sd": 0.00384900179459753
+   },
+   "permuted_digits|original": {
+    "value": 0.591111111111111,
+    "display": "59.1",
+    "sd": 0.026943012562182598
+   },
+   "permuted_digits|digits": {
+    "value": 0.38222222222222224,
+    "display": "38.2",
+    "sd": 0.010183501544346316
+   },
+   "permuted_digits|lowercase": {
+    "value": 0.591111111111111,
+    "display": "59.1",
+    "sd": 0.021430335024428822
+   },
+   "permuted_digits|permuted_digits": {
+    "value": 0.3288888888888889,
+    "display": "32.9",
+    "sd": 0.003849001794597498
+   }
+  },
+  "hard": {
+   "original|original": {
+    "value": 0.86,
+    "display": "86.0",
+    "sd": 0.0
+   },
+   "original|digits": {
+    "value": 0.47333333333333333,
+    "display": "47.3",
+    "sd": 0.006666666666666682
+   },
+   "original|lowercase": {
+    "value": 0.8733333333333333,
+    "display": "87.3",
+    "sd": 0.006666666666666654
+   },
+   "original|permuted_digits": {
+    "value": 0.3666666666666667,
+    "display": "36.7",
+    "sd": 0.0
+   },
+   "digits|original": {
+    "value": 0.9577777777777777,
+    "display": "95.8",
+    "sd": 0.00769800358919506
+   },
+   "digits|digits": {
+    "value": 0.4666666666666666,
+    "display": "46.7",
+    "sd": 0.0
+   },
+   "digits|lowercase": {
+    "value": 0.9311111111111111,
+    "display": "93.1",
+    "sd": 0.007698003589194996
+   },
+   "digits|permuted_digits": {
+    "value": 0.3666666666666667,
+    "display": "36.7",
+    "sd": 0.006666666666666654
+   },
+   "lowercase|original": {
+    "value": 1.0,
+    "display": "100.0",
+    "sd": 0.0
+   },
+   "lowercase|digits": {
+    "value": 0.46666666666666673,
+    "display": "46.7",
+    "sd": 0.0
+   },
+   "lowercase|lowercase": {
+    "value": 1.0,
+    "display": "100.0",
+    "sd": 0.0
+   },
+   "lowercase|permuted_digits": {
+    "value": 0.39333333333333337,
+    "display": "39.3",
+    "sd": 0.006666666666666682
+   },
+   "permuted_digits|original": {
+    "value": 0.6066666666666667,
+    "display": "60.7",
+    "sd": 0.013333333333333308
+   },
+   "permuted_digits|digits": {
+    "value": 0.3711111111111111,
+    "display": "37.1",
+    "sd": 0.003849001794597498
+   },
+   "permuted_digits|lowercase": {
+    "value": 0.5755555555555556,
+    "display": "57.6",
+    "sd": 0.02694301256218248
+   },
+   "permuted_digits|permuted_digits": {
+    "value": 0.3577777777777778,
+    "display": "35.8",
+    "sd": 0.00384900179459753
+   }
+  },
+  "das": {
+   "original|original": {
+    "value": 0.9044444444444444,
+    "display": "90.4",
+    "sd": 0.013877773329774228
+   },
+   "original|digits": {
+    "value": 0.49333333333333335,
+    "display": "49.3",
+    "sd": 0.006666666666666682
+   },
+   "original|lowercase": {
+    "value": 0.88,
+    "display": "88.0",
+    "sd": 0.011547005383792398
+   },
+   "original|permuted_digits": {
+    "value": 0.38,
+    "display": "38.0",
+    "sd": 6.409875621278546e-17
+   },
+   "digits|original": {
+    "value": 0.9533333333333333,
+    "display": "95.3",
+    "sd": 0.017638342073763923
+   },
+   "digits|digits": {
+    "value": 0.4533333333333333,
+    "display": "45.3",
+    "sd": 0.0
+   },
+   "digits|lowercase": {
+    "value": 0.8844444444444444,
+    "display": "88.4",
+    "sd": 0.010183501544346328
+   },
+   "digits|permuted_digits": {
+    "value": 0.32666666666666666,
+    "display": "32.7",
+    "sd": 0.006666666666666654
+   },
+   "lowercase|original": {
+    "value": 1.0,
+    "display": "100.0",
+    "sd": 0.0
+   },
+   "lowercase|digits": {
+    "value": 0.4555555555555556,
+    "display": "45.6",
+    "sd": 0.003849001794597498
+   },
+   "lowercase|lowercase": {
+    "value": 1.0,
+    "display": "100.0",
+    "sd": 0.0
+   },
+   "lowercase|permuted_digits": {
+    "value": 0.3133333333333333,
+    "display": "31.3",
+    "sd": 0.013333333333333336
+   },
+   "permuted_digits|original": {
+    "value": 0.6444444444444445,
+    "display": "64.4",
+    "sd": 0.04822785425380162
+   },
+   "permuted_digits|digits": {
+    "value": 0.41111111111111115,
+    "display": "41.1",
+    "sd": 0.003849001794597498
+   },
+   "permuted_digits|lowercase": {
+    "value": 0.611111111111111,
+    "display": "61.1",
+    "sd": 0.01677740985615716
+   },
+   "permuted_digits|permuted_digits": {
+    "value": 0.3333333333333333,
+    "display": "33.3",
+    "sd": 0.0
+   }
+  }
+ },
+ "native": {
+  "original": {
+   "value": 0.8600000143051147,
+   "display": "86.0"
+  },
+  "lowercase": {
+   "value": 1.0,
+   "display": "100.0"
+  },
+  "digits": {
+   "value": 0.949999988079071,
+   "display": "95.0"
+  },
+  "permuted_digits": {
+   "value": 0.6399999856948853,
+   "display": "64.0"
+  }
+ },
+ "pairs": {
+  "value": 150,
+  "display": "150"
+ },
+ "examples": {
+  "original|original": {
+   "eligible": 88,
+   "eligible_correct": 79,
+   "examples": [
+    {
+     "pair": 51,
+     "family": "answerPosition",
+     "donor": {
+      "prompt": "Question: Coins are gray. What color are coins?\nA. brown\nB. white\nC. gray\nD. red\nAnswer:",
+      "labels": [
+       "A",
+       "B",
+       "C",
+       "D"
+      ],
+      "answer_position": 2
+     },
+     "recipient": {
+      "prompt": "Question: Coins are gray. What color are coins?\nA. brown\nB. white\nC. red\nD. gray\nAnswer:",
+      "labels": [
+       "A",
+       "B",
+       "C",
+       "D"
+      ],
+      "answer_position": 3
+     },
+     "target_position": 2,
+     "expected_label": "C",
+     "emitted": "C",
+     "emitted_position": 2,
+     "correct": true
+    },
+    {
+     "pair": 54,
+     "family": "answerPosition",
+     "donor": {
+      "prompt": "Question: Grasshoppers are green. What color are grasshoppers?\nA. red\nB. green\nC. blue\nD. purple\nAnswer:",
+      "labels": [
+       "A",
+       "B",
+       "C",
+       "D"
+      ],
+      "answer_position": 1
+     },
+     "recipient": {
+      "prompt": "Question: Grasshoppers are green. What color are grasshoppers?\nA. red\nB. blue\nC. green\nD. purple\nAnswer:",
+      "labels": [
+       "A",
+       "B",
+       "C",
+       "D"
+      ],
+      "answer_position": 2
+     },
+     "target_position": 1,
+     "expected_label": "B",
+     "emitted": "B",
+     "emitted_position": 1,
+     "correct": true
+    },
+    {
+     "pair": 99,
+     "family": "answerPosition",
+     "donor": {
+      "prompt": "Question: Pretzels are brown. What color are pretzels?\nA. brown\nB. green\nC. gray\nD. yellow\nAnswer:",
+      "labels": [
+       "A",
+       "B",
+       "C",
+       "D"
+      ],
+      "answer_position": 0
+     },
+     "recipient": {
+      "prompt": "Question: Pretzels are brown. What color are pretzels?\nA. green\nB. brown\nC. gray\nD. yellow\nAnswer:",
+      "labels": [
+       "A",
+       "B",
+       "C",
+       "D"
+      ],
+      "answer_position": 1
+     },
+     "target_position": 0,
+     "expected_label": "A",
+     "emitted": "A",
+     "emitted_position": 0,
+     "correct": true
+    },
+    {
+     "pair": 56,
+     "family": "answerPosition_randomLetter",
+     "donor": {
+      "prompt": "Question: Grasshoppers are green. What color are grasshoppers?\nK. red\nX. green\nJ. blue\nH. purple\nAnswer:",
+      "labels": [
+       "K",
+       "X",
+       "J",
+       "H"
+      ],
+      "answer_position": 1
+     },
+     "recipient": {
+      "prompt": "Question: Grasshoppers are green. What color are grasshoppers?\nA. red\nB. blue\nC. green\nD. purple\nAnswer:",
+      "labels": [
+       "A",
+       "B",
+       "C",
+       "D"
+      ],
+      "answer_position": 2
+     },
+     "target_position": 1,
+     "expected_label": "B",
+     "emitted": "C",
+     "emitted_position": 2,
+     "correct": false
+    },
+    {
+     "pair": 68,
+     "family": "answerPosition_randomLetter",
+     "donor": {
+      "prompt": "Question: A rainforest is green. What color is a rainforest?\nK. pink\nC. green\nX. blue\nR. white\nAnswer:",
+      "labels": [
+       "K",
+       "C",
+       "X",
+       "R"
+      ],
+      "answer_position": 1
+     },
+     "recipient": {
+      "prompt": "Question: A rainforest is green. What color is a rainforest?\nA. pink\nB. blue\nC. white\nD. green\nAnswer:",
+      "labels": [
+       "A",
+       "B",
+       "C",
+       "D"
+      ],
+      "answer_position": 3
+     },
+     "target_position": 1,
+     "expected_label": "B",
+     "emitted": "C",
+     "emitted_position": 2,
+     "correct": false
+    },
+    {
+     "pair": 137,
+     "family": "answerPosition_randomLetter",
+     "donor": {
+      "prompt": "Question: Swans are white. What color are swans?\nS. green\nA. white\nN. orange\nC. yellow\nAnswer:",
+      "labels": [
+       "S",
+       "A",
+       "N",
+       "C"
+      ],
+      "answer_position": 1
+     },
+     "recipient": {
+      "prompt": "Question: Swans are white. What color are swans?\nA. green\nB. orange\nC. white\nD. yellow\nAnswer:",
+      "labels": [
+       "A",
+       "B",
+       "C",
+       "D"
+      ],
+      "answer_position": 2
+     },
+     "target_position": 1,
+     "expected_label": "B",
+     "emitted": "A",
+     "emitted_position": 0,
+     "correct": false
+    }
+   ]
+  },
+  "original|lowercase": {
+   "eligible": 88,
+   "eligible_correct": 79,
+   "examples": [
+    {
+     "pair": 51,
+     "family": "answerPosition",
+     "donor": {
+      "prompt": "Question: Coins are gray. What color are coins?\nA. brown\nB. white\nC. gray\nD. red\nAnswer:",
+      "labels": [
+       "A",
+       "B",
+       "C",
+       "D"
+      ],
+      "answer_position": 2
+     },
+     "recipient": {
+      "prompt": "Question: Coins are gray. What color are coins?\na. brown\nb. white\nc. red\nd. gray\nAnswer:",
+      "labels": [
+       "a",
+       "b",
+       "c",
+       "d"
+      ],
+      "answer_position": 3
+     },
+     "target_position": 2,
+     "expected_label": "c",
+     "emitted": "c",
+     "emitted_position": 2,
+     "correct": true
+    },
+    {
+     "pair": 54,
+     "family": "answerPosition",
+     "donor": {
+      "prompt": "Question: Grasshoppers are green. What color are grasshoppers?\nA. red\nB. green\nC. blue\nD. purple\nAnswer:",
+      "labels": [
+       "A",
+       "B",
+       "C",
+       "D"
+      ],
+      "answer_position": 1
+     },
+     "recipient": {
+      "prompt": "Question: Grasshoppers are green. What color are grasshoppers?\na. red\nb. blue\nc. green\nd. purple\nAnswer:",
+      "labels": [
+       "a",
+       "b",
+       "c",
+       "d"
+      ],
+      "answer_position": 2
+     },
+     "target_position": 1,
+     "expected_label": "b",
+     "emitted": "b",
+     "emitted_position": 1,
+     "correct": true
+    },
+    {
+     "pair": 99,
+     "family": "answerPosition",
+     "donor": {
+      "prompt": "Question: Pretzels are brown. What color are pretzels?\nA. brown\nB. green\nC. gray\nD. yellow\nAnswer:",
+      "labels": [
+       "A",
+       "B",
+       "C",
+       "D"
+      ],
+      "answer_position": 0
+     },
+     "recipient": {
+      "prompt": "Question: Pretzels are brown. What color are pretzels?\na. green\nb. brown\nc. gray\nd. yellow\nAnswer:",
+      "labels": [
+       "a",
+       "b",
+       "c",
+       "d"
+      ],
+      "answer_position": 1
+     },
+     "target_position": 0,
+     "expected_label": "a",
+     "emitted": "a",
+     "emitted_position": 0,
+     "correct": true
+    },
+    {
+     "pair": 56,
+     "family": "answerPosition_randomLetter",
+     "donor": {
+      "prompt": "Question: Grasshoppers are green. What color are grasshoppers?\nK. red\nX. green\nJ. blue\nH. purple\nAnswer:",
+      "labels": [
+       "K",
+       "X",
+       "J",
+       "H"
+      ],
+      "answer_position": 1
+     },
+     "recipient": {
+      "prompt": "Question: Grasshoppers are green. What color are grasshoppers?\na. red\nb. blue\nc. green\nd. purple\nAnswer:",
+      "labels": [
+       "a",
+       "b",
+       "c",
+       "d"
+      ],
+      "answer_position": 2
+     },
+     "target_position": 1,
+     "expected_label": "b",
+     "emitted": "c",
+     "emitted_position": 2,
+     "correct": false
+    },
+    {
+     "pair": 68,
+     "family": "answerPosition_randomLetter",
+     "donor": {
+      "prompt": "Question: A rainforest is green. What color is a rainforest?\nK. pink\nC. green\nX. blue\nR. white\nAnswer:",
+      "labels": [
+       "K",
+       "C",
+       "X",
+       "R"
+      ],
+      "answer_position": 1
+     },
+     "recipient": {
+      "prompt": "Question: A rainforest is green. What color is a rainforest?\na. pink\nb. blue\nc. white\nd. green\nAnswer:",
+      "labels": [
+       "a",
+       "b",
+       "c",
+       "d"
+      ],
+      "answer_position": 3
+     },
+     "target_position": 1,
+     "expected_label": "b",
+     "emitted": "c",
+     "emitted_position": 2,
+     "correct": false
+    },
+    {
+     "pair": 137,
+     "family": "answerPosition_randomLetter",
+     "donor": {
+      "prompt": "Question: Swans are white. What color are swans?\nS. green\nA. white\nN. orange\nC. yellow\nAnswer:",
+      "labels": [
+       "S",
+       "A",
+       "N",
+       "C"
+      ],
+      "answer_position": 1
+     },
+     "recipient": {
+      "prompt": "Question: Swans are white. What color are swans?\na. green\nb. orange\nc. white\nd. yellow\nAnswer:",
+      "labels": [
+       "a",
+       "b",
+       "c",
+       "d"
+      ],
+      "answer_position": 2
+     },
+     "target_position": 1,
+     "expected_label": "b",
+     "emitted": "a",
+     "emitted_position": 0,
+     "correct": false
+    }
+   ]
+  },
+  "original|digits": {
+   "eligible": 84,
+   "eligible_correct": 17,
+   "examples": [
+    {
+     "pair": 38,
+     "family": "answerPosition_randomLetter",
+     "donor": {
+      "prompt": "Question: A duckling is yellow. What color is a duckling?\nE. blue\nO. green\nR. purple\nG. yellow\nAnswer:",
+      "labels": [
+       "E",
+       "O",
+       "R",
+       "G"
+      ],
+      "answer_position": 3
+     },
+     "recipient": {
+      "prompt": "Question: A duckling is yellow. What color is a duckling?\n1. blue\n2. yellow\n3. green\n4. purple\nAnswer:",
+      "labels": [
+       "1",
+       "2",
+       "3",
+       "4"
+      ],
+      "answer_position": 1
+     },
+     "target_position": 3,
+     "expected_label": "4",
+     "emitted": "4",
+     "emitted_position": 3,
+     "correct": true
+    },
+    {
+     "pair": 105,
+     "family": "answerPosition",
+     "donor": {
+      "prompt": "Question: Sheep are white. What color are sheep?\nA. red\nB. orange\nC. purple\nD. white\nAnswer:",
+      "labels": [
+       "A",
+       "B",
+       "C",
+       "D"
+      ],
+      "answer_position": 3
+     },
+     "recipient": {
+      "prompt": "Question: Sheep are white. What color are sheep?\n1. red\n2. white\n3. orange\n4. purple\nAnswer:",
+      "labels": [
+       "1",
+       "2",
+       "3",
+       "4"
+      ],
+      "answer_position": 1
+     },
+     "target_position": 3,
+     "expected_label": "4",
+     "emitted": "4",
+     "emitted_position": 3,
+     "correct": true
+    },
+    {
+     "pair": 134,
+     "family": "answerPosition_randomLetter",
+     "donor": {
+      "prompt": "Question: Zebras are black. What color are zebras?\nO. black\nQ. gray\nL. red\nV. pink\nAnswer:",
+      "labels": [
+       "O",
+       "Q",
+       "L",
+       "V"
+      ],
+      "answer_position": 0
+     },
+     "recipient": {
+      "prompt": "Question: Zebras are black. What color are zebras?\n1. gray\n2. black\n3. red\n4. pink\nAnswer:",
+      "labels": [
+       "1",
+       "2",
+       "3",
+       "4"
+      ],
+      "answer_position": 1
+     },
+     "target_position": 0,
+     "expected_label": "1",
+     "emitted": "1",
+     "emitted_position": 0,
+     "correct": true
+    },
+    {
+     "pair": 62,
+     "family": "answerPosition_randomLetter",
+     "donor": {
+      "prompt": "Question: The sun is yellow. What color is the sun?\nJ. gray\nM. black\nO. yellow\nH. blue\nAnswer:",
+      "labels": [
+       "J",
+       "M",
+       "O",
+       "H"
+      ],
+      "answer_position": 2
+     },
+     "recipient": {
+      "prompt": "Question: The sun is yellow. What color is the sun?\n1. yellow\n2. gray\n3. black\n4. blue\nAnswer:",
+      "labels": [
+       "1",
+       "2",
+       "3",
+       "4"
+      ],
+      "answer_position": 0
+     },
+     "target_position": 2,
+     "expected_label": "3",
+     "emitted": "1",
+     "emitted_position": 0,
+     "correct": false
+    },
+    {
+     "pair": 63,
+     "family": "answerPosition",
+     "donor": {
+      "prompt": "Question: Blueberries are blue. What color are blueberries?\nA. blue\nB. white\nC. black\nD. yellow\nAnswer:",
+      "labels": [
+       "A",
+       "B",
+       "C",
+       "D"
+      ],
+      "answer_position": 0
+     },
+     "recipient": {
+      "prompt": "Question: Blueberries are blue. What color are blueberries?\n1. white\n2. black\n3. blue\n4. yellow\nAnswer:",
+      "labels": [
+       "1",
+       "2",
+       "3",
+       "4"
+      ],
+      "answer_position": 2
+     },
+     "target_position": 0,
+     "expected_label": "1",
+     "emitted": "3",
+     "emitted_position": 2,
+     "correct": false
+    },
+    {
+     "pair": 116,
+     "family": "answerPosition_randomLetter",
+     "donor": {
+      "prompt": "Question: Eggs are white. What color are eggs?\nI. gray\nM. white\nV. purple\nY. green\nAnswer:",
+      "labels": [
+       "I",
+       "M",
+       "V",
+       "Y"
+      ],
+      "answer_position": 1
+     },
+     "recipient": {
+      "prompt": "Question: Eggs are white. What color are eggs?\n1. white\n2. gray\n3. purple\n4. green\nAnswer:",
+      "labels": [
+       "1",
+       "2",
+       "3",
+       "4"
+      ],
+      "answer_position": 0
+     },
+     "target_position": 1,
+     "expected_label": "2",
+     "emitted": "1",
+     "emitted_position": 0,
+     "correct": false
+    }
+   ]
+  },
+  "original|permuted_digits": {
+   "eligible": 54,
+   "eligible_correct": 3,
+   "examples": [
+    {
+     "pair": 18,
+     "family": "answerPosition",
+     "donor": {
+      "prompt": "Question: Bombs are black. What color are bombs?\nA. brown\nB. orange\nC. pink\nD. black\nAnswer:",
+      "labels": [
+       "A",
+       "B",
+       "C",
+       "D"
+      ],
+      "answer_position": 3
+     },
+     "recipient": {
+      "prompt": "Question: Bombs are black. What color are bombs?\n4. black\n1. brown\n3. orange\n2. pink\nAnswer:",
+      "labels": [
+       "4",
+       "1",
+       "3",
+       "2"
+      ],
+      "answer_position": 0
+     },
+     "target_position": 3,
+     "expected_label": "2",
+     "emitted": "2",
+     "emitted_position": 3,
+     "correct": true
+    },
+    {
+     "pair": 48,
+     "family": "answerPosition",
+     "donor": {
+      "prompt": "Question: Daggers are gray. What color are daggers?\nA. blue\nB. black\nC. gray\nD. orange\nAnswer:",
+      "labels": [
+       "A",
+       "B",
+       "C",
+       "D"
+      ],
+      "answer_position": 2
+     },
+     "recipient": {
+      "prompt": "Question: Daggers are gray. What color are daggers?\n3. blue\n1. gray\n2. black\n4. orange\nAnswer:",
+      "labels": [
+       "3",
+       "1",
+       "2",
+       "4"
+      ],
+      "answer_position": 1
+     },
+     "target_position": 2,
+     "expected_label": "2",
+     "emitted": "2",
+     "emitted_position": 2,
+     "correct": true
+    },
+    {
+     "pair": 90,
+     "family": "answerPosition",
+     "donor": {
+      "prompt": "Question: Marshmallows are white. What color are marshmallows?\nA. pink\nB. white\nC. yellow\nD. purple\nAnswer:",
+      "labels": [
+       "A",
+       "B",
+       "C",
+       "D"
+      ],
+      "answer_position": 1
+     },
+     "recipient": {
+      "prompt": "Question: Marshmallows are white. What color are marshmallows?\n4. pink\n1. yellow\n3. purple\n2. white\nAnswer:",
+      "labels": [
+       "4",
+       "1",
+       "3",
+       "2"
+      ],
+      "answer_position": 3
+     },
+     "target_position": 1,
+     "expected_label": "1",
+     "emitted": "1",
+     "emitted_position": 1,
+     "correct": true
+    },
+    {
+     "pair": 44,
+     "family": "answerPosition_randomLetter",
+     "donor": {
+      "prompt": "Question: Rubies are red. What color are rubies?\nQ. blue\nL. black\nC. red\nI. white\nAnswer:",
+      "labels": [
+       "Q",
+       "L",
+       "C",
+       "I"
+      ],
+      "answer_position": 2
+     },
+     "recipient": {
+      "prompt": "Question: Rubies are red. What color are rubies?\n1. red\n3. blue\n2. black\n4. white\nAnswer:",
+      "labels": [
+       "1",
+       "3",
+       "2",
+       "4"
+      ],
+      "answer_position": 0
+     },
+     "target_position": 2,
+     "expected_label": "2",
+     "emitted": "1",
+     "emitted_position": 0,
+     "correct": false
+    },
+    {
+     "pair": 74,
+     "family": "answerPosition_randomLetter",
+     "donor": {
+      "prompt": "Question: Hedgehogs are brown. What color are hedgehogs?\nR. brown\nV. white\nS. gray\nD. purple\nAnswer:",
+      "labels": [
+       "R",
+       "V",
+       "S",
+       "D"
+      ],
+      "answer_position": 0
+     },
+     "recipient": {
+      "prompt": "Question: Hedgehogs are brown. What color are hedgehogs?\n1. white\n4. gray\n3. purple\n2. brown\nAnswer:",
+      "labels": [
+       "1",
+       "4",
+       "3",
+       "2"
+      ],
+      "answer_position": 3
+     },
+     "target_position": 0,
+     "expected_label": "1",
+     "emitted": "2",
+     "emitted_position": 3,
+     "correct": false
+    },
+    {
+     "pair": 119,
+     "family": "answerPosition_randomLetter",
+     "donor": {
+      "prompt": "Question: Musical keyboards are white. What color are musical keyboards?\nR. white\nO. orange\nS. purple\nY. yellow\nAnswer:",
+      "labels": [
+       "R",
+       "O",
+       "S",
+       "Y"
+      ],
+      "answer_position": 0
+     },
+     "recipient": {
+      "prompt": "Question: Musical keyboards are white. What color are musical keyboards?\n4. orange\n3. purple\n2. yellow\n1. white\nAnswer:",
+      "labels": [
+       "4",
+       "3",
+       "2",
+       "1"
+      ],
+      "answer_position": 3
+     },
+     "target_position": 0,
+     "expected_label": "4",
+     "emitted": "1",
+     "emitted_position": 3,
+     "correct": false
+    }
+   ]
+  },
+  "lowercase|original": {
+   "eligible": 50,
+   "eligible_correct": 50,
+   "examples": [
+    {
+     "pair": 39,
+     "family": "answerPosition",
+     "donor": {
+      "prompt": "Question: Rhinoceros are gray. What color are rhinoceros?\na. purple\nb. gray\nc. red\nd. green\nAnswer:",
+      "labels": [
+       "a",
+       "b",
+       "c",
+       "d"
+      ],
+      "answer_position": 1
+     },
+     "recipient": {
+      "prompt": "Question: Rhinoceros are gray. What color are rhinoceros?\nA. purple\nB. red\nC. gray\nD. green\nAnswer:",
+      "labels": [
+       "A",
+       "B",
+       "C",
+       "D"
+      ],
+      "answer_position": 2
+     },
+     "target_position": 1,
+     "expected_label": "B",
+     "emitted": "B",
+     "emitted_position": 1,
+     "correct": true
+    },
+    {
+     "pair": 75,
+     "family": "answerPosition",
+     "donor": {
+      "prompt": "Question: Tangerines are orange. What color are tangerines?\na. blue\nb. pink\nc. gray\nd. orange\nAnswer:",
+      "labels": [
+       "a",
+       "b",
+       "c",
+       "d"
+      ],
+      "answer_position": 3
+     },
+     "recipient": {
+      "prompt": "Question: Tangerines are orange. What color are tangerines?\nA. blue\nB. orange\nC. pink\nD. gray\nAnswer:",
+      "labels": [
+       "A",
+       "B",
+       "C",
+       "D"
+      ],
+      "answer_position": 1
+     },
+     "target_position": 3,
+     "expected_label": "D",
+     "emitted": "D",
+     "emitted_position": 3,
+     "correct": true
+    },
+    {
+     "pair": 120,
+     "family": "answerPosition",
+     "donor": {
+      "prompt": "Question: Basketballs are orange. What color are basketballs?\na. brown\nb. orange\nc. purple\nd. pink\nAnswer:",
+      "labels": [
+       "a",
+       "b",
+       "c",
+       "d"
+      ],
+      "answer_position": 1
+     },
+     "recipient": {
+      "prompt": "Question: Basketballs are orange. What color are basketballs?\nA. brown\nB. purple\nC. orange\nD. pink\nAnswer:",
+      "labels": [
+       "A",
+       "B",
+       "C",
+       "D"
+      ],
+      "answer_position": 2
+     },
+     "target_position": 1,
+     "expected_label": "B",
+     "emitted": "B",
+     "emitted_position": 1,
+     "correct": true
+    }
+   ]
+  },
+  "lowercase|lowercase": {
+   "eligible": 50,
+   "eligible_correct": 50,
+   "examples": [
+    {
+     "pair": 39,
+     "family": "answerPosition",
+     "donor": {
+      "prompt": "Question: Rhinoceros are gray. What color are rhinoceros?\na. purple\nb. gray\nc. red\nd. green\nAnswer:",
+      "labels": [
+       "a",
+       "b",
+       "c",
+       "d"
+      ],
+      "answer_position": 1
+     },
+     "recipient": {
+      "prompt": "Question: Rhinoceros are gray. What color are rhinoceros?\na. purple\nb. red\nc. gray\nd. green\nAnswer:",
+      "labels": [
+       "a",
+       "b",
+       "c",
+       "d"
+      ],
+      "answer_position": 2
+     },
+     "target_position": 1,
+     "expected_label": "b",
+     "emitted": "b",
+     "emitted_position": 1,
+     "correct": true
+    },
+    {
+     "pair": 75,
+     "family": "answerPosition",
+     "donor": {
+      "prompt": "Question: Tangerines are orange. What color are tangerines?\na. blue\nb. pink\nc. gray\nd. orange\nAnswer:",
+      "labels": [
+       "a",
+       "b",
+       "c",
+       "d"
+      ],
+      "answer_position": 3
+     },
+     "recipient": {
+      "prompt": "Question: Tangerines are orange. What color are tangerines?\na. blue\nb. orange\nc. pink\nd. gray\nAnswer:",
+      "labels": [
+       "a",
+       "b",
+       "c",
+       "d"
+      ],
+      "answer_position": 1
+     },
+     "target_position": 3,
+     "expected_label": "d",
+     "emitted": "d",
+     "emitted_position": 3,
+     "correct": true
+    },
+    {
+     "pair": 120,
+     "family": "answerPosition",
+     "donor": {
+      "prompt": "Question: Basketballs are orange. What color are basketballs?\na. brown\nb. orange\nc. purple\nd. pink\nAnswer:",
+      "labels": [
+       "a",
+       "b",
+       "c",
+       "d"
+      ],
+      "answer_position": 1
+     },
+     "recipient": {
+      "prompt": "Question: Basketballs are orange. What color are basketballs?\na. brown\nb. purple\nc. orange\nd. pink\nAnswer:",
+      "labels": [
+       "a",
+       "b",
+       "c",
+       "d"
+      ],
+      "answer_position": 2
+     },
+     "target_position": 1,
+     "expected_label": "b",
+     "emitted": "b",
+     "emitted_position": 1,
+     "correct": true
+    }
+   ]
+  },
+  "lowercase|digits": {
+   "eligible": 48,
+   "eligible_correct": 11,
+   "examples": [
+    {
+     "pair": 30,
+     "family": "answerPosition",
+     "donor": {
+      "prompt": "Question: Flour is white. What color is flour?\na. gray\nb. pink\nc. black\nd. white\nAnswer:",
+      "labels": [
+       "a",
+       "b",
+       "c",
+       "d"
+      ],
+      "answer_position": 3
+     },
+     "recipient": {
+      "prompt": "Question: Flour is white. What color is flour?\n1. gray\n2. pink\n3. white\n4. black\nAnswer:",
+      "labels": [
+       "1",
+       "2",
+       "3",
+       "4"
+      ],
+      "answer_position": 2
+     },
+     "target_position": 3,
+     "expected_label": "4",
+     "emitted": "4",
+     "emitted_position": 3,
+     "correct": true
+    },
+    {
+     "pair": 87,
+     "family": "answerPosition",
+     "donor": {
+      "prompt": "Question: Televisions are black. What color are televisions?\na. red\nb. white\nc. pink\nd. black\nAnswer:",
+      "labels": [
+       "a",
+       "b",
+       "c",
+       "d"
+      ],
+      "answer_position": 3
+     },
+     "recipient": {
+      "prompt": "Question: Televisions are black. What color are televisions?\n1. black\n2. red\n3. white\n4. pink\nAnswer:",
+      "labels": [
+       "1",
+       "2",
+       "3",
+       "4"
+      ],
+      "answer_position": 0
+     },
+     "target_position": 3,
+     "expected_label": "4",
+     "emitted": "4",
+     "emitted_position": 3,
+     "correct": true
+    },
+    {
+     "pair": 132,
+     "family": "answerPosition",
+     "donor": {
+      "prompt": "Question: Zebras are black. What color are zebras?\na. black\nb. gray\nc. red\nd. pink\nAnswer:",
+      "labels": [
+       "a",
+       "b",
+       "c",
+       "d"
+      ],
+      "answer_position": 0
+     },
+     "recipient": {
+      "prompt": "Question: Zebras are black. What color are zebras?\n1. gray\n2. black\n3. red\n4. pink\nAnswer:",
+      "labels": [
+       "1",
+       "2",
+       "3",
+       "4"
+      ],
+      "answer_position": 1
+     },
+     "target_position": 0,
+     "expected_label": "1",
+     "emitted": "1",
+     "emitted_position": 0,
+     "correct": true
+    },
+    {
+     "pair": 57,
+     "family": "answerPosition",
+     "donor": {
+      "prompt": "Question: Skunks are black. What color are skunks?\na. black\nb. yellow\nc. white\nd. blue\nAnswer:",
+      "labels": [
+       "a",
+       "b",
+       "c",
+       "d"
+      ],
+      "answer_position": 0
+     },
+     "recipient": {
+      "prompt": "Question: Skunks are black. What color are skunks?\n1. yellow\n2. white\n3. blue\n4. black\nAnswer:",
+      "labels": [
+       "1",
+       "2",
+       "3",
+       "4"
+      ],
+      "answer_position": 3
+     },
+     "target_position": 0,
+     "expected_label": "1",
+     "emitted": "4",
+     "emitted_position": 3,
+     "correct": false
+    },
+    {
+     "pair": 84,
+     "family": "answerPosition",
+     "donor": {
+      "prompt": "Question: Bananas are yellow. What color are bananas?\na. yellow\nb. black\nc. orange\nd. blue\nAnswer:",
+      "labels": [
+       "a",
+       "b",
+       "c",
+       "d"
+      ],
+      "answer_position": 0
+     },
+     "recipient": {
+      "prompt": "Question: Bananas are yellow. What color are bananas?\n1. black\n2. orange\n3. yellow\n4. blue\nAnswer:",
+      "labels": [
+       "1",
+       "2",
+       "3",
+       "4"
+      ],
+      "answer_position": 2
+     },
+     "target_position": 0,
+     "expected_label": "1",
+     "emitted": "3",
+     "emitted_position": 2,
+     "correct": false
+    },
+    {
+     "pair": 99,
+     "family": "answerPosition",
+     "donor": {
+      "prompt": "Question: Pretzels are brown. What color are pretzels?\na. brown\nb. green\nc. gray\nd. yellow\nAnswer:",
+      "labels": [
+       "a",
+       "b",
+       "c",
+       "d"
+      ],
+      "answer_position": 0
+     },
+     "recipient": {
+      "prompt": "Question: Pretzels are brown. What color are pretzels?\n1. green\n2. brown\n3. gray\n4. yellow\nAnswer:",
+      "labels": [
+       "1",
+       "2",
+       "3",
+       "4"
+      ],
+      "answer_position": 1
+     },
+     "target_position": 0,
+     "expected_label": "1",
+     "emitted": "2",
+     "emitted_position": 1,
+     "correct": false
+    }
+   ]
+  },
+  "lowercase|permuted_digits": {
+   "eligible": 31,
+   "eligible_correct": 1,
+   "examples": [
+    {
+     "pair": 18,
+     "family": "answerPosition",
+     "donor": {
+      "prompt": "Question: Bombs are black. What color are bombs?\na. brown\nb. orange\nc. pink\nd. black\nAnswer:",
+      "labels": [
+       "a",
+       "b",
+       "c",
+       "d"
+      ],
+      "answer_position": 3
+     },
+     "recipient": {
+      "prompt": "Question: Bombs are black. What color are bombs?\n4. black\n1. brown\n3. orange\n2. pink\nAnswer:",
+      "labels": [
+       "4",
+       "1",
+       "3",
+       "2"
+      ],
+      "answer_position": 0
+     },
+     "target_position": 3,
+     "expected_label": "2",
+     "emitted": "2",
+     "emitted_position": 3,
+     "correct": true
+    },
+    {
+     "pair": 33,
+     "family": "answerPosition",
+     "donor": {
+      "prompt": "Question: Lavender is purple. What color is lavender?\na. brown\nb. purple\nc. red\nd. blue\nAnswer:",
+      "labels": [
+       "a",
+       "b",
+       "c",
+       "d"
+      ],
+      "answer_position": 1
+     },
+     "recipient": {
+      "prompt": "Question: Lavender is purple. What color is lavender?\n2. brown\n4. red\n3. blue\n1. purple\nAnswer:",
+      "labels": [
+       "2",
+       "4",
+       "3",
+       "1"
+      ],
+      "answer_position": 3
+     },
+     "target_position": 1,
+     "expected_label": "4",
+     "emitted": "1",
+     "emitted_position": 3,
+     "correct": false
+    },
+    {
+     "pair": 63,
+     "family": "answerPosition",
+     "donor": {
+      "prompt": "Question: Blueberries are blue. What color are blueberries?\na. blue\nb. white\nc. black\nd. yellow\nAnswer:",
+      "labels": [
+       "a",
+       "b",
+       "c",
+       "d"
+      ],
+      "answer_position": 0
+     },
+     "recipient": {
+      "prompt": "Question: Blueberries are blue. What color are blueberries?\n2. white\n4. black\n1. blue\n3. yellow\nAnswer:",
+      "labels": [
+       "2",
+       "4",
+       "1",
+       "3"
+      ],
+      "answer_position": 2
+     },
+     "target_position": 0,
+     "expected_label": "2",
+     "emitted": "1",
+     "emitted_position": 2,
+     "correct": false
+    },
+    {
+     "pair": 102,
+     "family": "answerPosition",
+     "donor": {
+      "prompt": "Question: The sky is blue. What color is the sky?\na. red\nb. blue\nc. purple\nd. black\nAnswer:",
+      "labels": [
+       "a",
+       "b",
+       "c",
+       "d"
+      ],
+      "answer_position": 1
+     },
+     "recipient": {
+      "prompt": "Question: The sky is blue. What color is the sky?\n4. red\n3. purple\n2. blue\n1. black\nAnswer:",
+      "labels": [
+       "4",
+       "3",
+       "2",
+       "1"
+      ],
+      "answer_position": 2
+     },
+     "target_position": 1,
+     "expected_label": "3",
+     "emitted": "2",
+     "emitted_position": 2,
+     "correct": false
+    }
+   ]
+  },
+  "digits|original": {
+   "eligible": 47,
+   "eligible_correct": 41,
+   "examples": [
+    {
+     "pair": 54,
+     "family": "answerPosition",
+     "donor": {
+      "prompt": "Question: Grasshoppers are green. What color are grasshoppers?\n1. red\n2. green\n3. blue\n4. purple\nAnswer:",
+      "labels": [
+       "1",
+       "2",
+       "3",
+       "4"
+      ],
+      "answer_position": 1
+     },
+     "recipient": {
+      "prompt": "Question: Grasshoppers are green. What color are grasshoppers?\nA. red\nB. blue\nC. green\nD. purple\nAnswer:",
+      "labels": [
+       "A",
+       "B",
+       "C",
+       "D"
+      ],
+      "answer_position": 2
+     },
+     "target_position": 1,
+     "expected_label": "B",
+     "emitted": "B",
+     "emitted_position": 1,
+     "correct": true
+    },
+    {
+     "pair": 90,
+     "family": "answerPosition",
+     "donor": {
+      "prompt": "Question: Marshmallows are white. What color are marshmallows?\n1. pink\n2. white\n3. yellow\n4. purple\nAnswer:",
+      "labels": [
+       "1",
+       "2",
+       "3",
+       "4"
+      ],
+      "answer_position": 1
+     },
+     "recipient": {
+      "prompt": "Question: Marshmallows are white. What color are marshmallows?\nA. pink\nB. yellow\nC. purple\nD. white\nAnswer:",
+      "labels": [
+       "A",
+       "B",
+       "C",
+       "D"
+      ],
+      "answer_position": 3
+     },
+     "target_position": 1,
+     "expected_label": "B",
+     "emitted": "B",
+     "emitted_position": 1,
+     "correct": true
+    },
+    {
+     "pair": 147,
+     "family": "answerPosition",
+     "donor": {
+      "prompt": "Question: Potatoes are brown. What color are potatoes?\n1. yellow\n2. brown\n3. orange\n4. red\nAnswer:",
+      "labels": [
+       "1",
+       "2",
+       "3",
+       "4"
+      ],
+      "answer_position": 1
+     },
+     "recipient": {
+      "prompt": "Question: Potatoes are brown. What color are potatoes?\nA. brown\nB. yellow\nC. orange\nD. red\nAnswer:",
+      "labels": [
+       "A",
+       "B",
+       "C",
+       "D"
+      ],
+      "answer_position": 0
+     },
+     "target_position": 1,
+     "expected_label": "B",
+     "emitted": "B",
+     "emitted_position": 1,
+     "correct": true
+    },
+    {
+     "pair": 24,
+     "family": "answerPosition",
+     "donor": {
+      "prompt": "Question: An iceberg is white. What color is an iceberg?\n1. red\n2. white\n3. orange\n4. pink\nAnswer:",
+      "labels": [
+       "1",
+       "2",
+       "3",
+       "4"
+      ],
+      "answer_position": 1
+     },
+     "recipient": {
+      "prompt": "Question: An iceberg is white. What color is an iceberg?\nA. red\nB. orange\nC. white\nD. pink\nAnswer:",
+      "labels": [
+       "A",
+       "B",
+       "C",
+       "D"
+      ],
+      "answer_position": 2
+     },
+     "target_position": 1,
+     "expected_label": "B",
+     "emitted": "C",
+     "emitted_position": 2,
+     "correct": false
+    },
+    {
+     "pair": 48,
+     "family": "answerPosition",
+     "donor": {
+      "prompt": "Question: Daggers are gray. What color are daggers?\n1. blue\n2. black\n3. gray\n4. orange\nAnswer:",
+      "labels": [
+       "1",
+       "2",
+       "3",
+       "4"
+      ],
+      "answer_position": 2
+     },
+     "recipient": {
+      "prompt": "Question: Daggers are gray. What color are daggers?\nA. blue\nB. gray\nC. black\nD. orange\nAnswer:",
+      "labels": [
+       "A",
+       "B",
+       "C",
+       "D"
+      ],
+      "answer_position": 1
+     },
+     "target_position": 2,
+     "expected_label": "C",
+     "emitted": "B",
+     "emitted_position": 1,
+     "correct": false
+    },
+    {
+     "pair": 129,
+     "family": "answerPosition",
+     "donor": {
+      "prompt": "Question: Burritos are brown. What color are burritos?\n1. purple\n2. black\n3. brown\n4. green\nAnswer:",
+      "labels": [
+       "1",
+       "2",
+       "3",
+       "4"
+      ],
+      "answer_position": 2
+     },
+     "recipient": {
+      "prompt": "Question: Burritos are brown. What color are burritos?\nA. brown\nB. purple\nC. black\nD. green\nAnswer:",
+      "labels": [
+       "A",
+       "B",
+       "C",
+       "D"
+      ],
+      "answer_position": 0
+     },
+     "target_position": 2,
+     "expected_label": "C",
+     "emitted": "D",
+     "emitted_position": 3,
+     "correct": false
+    }
+   ]
+  },
+  "digits|lowercase": {
+   "eligible": 47,
+   "eligible_correct": 41,
+   "examples": [
+    {
+     "pair": 54,
+     "family": "answerPosition",
+     "donor": {
+      "prompt": "Question: Grasshoppers are green. What color are grasshoppers?\n1. red\n2. green\n3. blue\n4. purple\nAnswer:",
+      "labels": [
+       "1",
+       "2",
+       "3",
+       "4"
+      ],
+      "answer_position": 1
+     },
+     "recipient": {
+      "prompt": "Question: Grasshoppers are green. What color are grasshoppers?\na. red\nb. blue\nc. green\nd. purple\nAnswer:",
+      "labels": [
+       "a",
+       "b",
+       "c",
+       "d"
+      ],
+      "answer_position": 2
+     },
+     "target_position": 1,
+     "expected_label": "b",
+     "emitted": "b",
+     "emitted_position": 1,
+     "correct": true
+    },
+    {
+     "pair": 90,
+     "family": "answerPosition",
+     "donor": {
+      "prompt": "Question: Marshmallows are white. What color are marshmallows?\n1. pink\n2. white\n3. yellow\n4. purple\nAnswer:",
+      "labels": [
+       "1",
+       "2",
+       "3",
+       "4"
+      ],
+      "answer_position": 1
+     },
+     "recipient": {
+      "prompt": "Question: Marshmallows are white. What color are marshmallows?\na. pink\nb. yellow\nc. purple\nd. white\nAnswer:",
+      "labels": [
+       "a",
+       "b",
+       "c",
+       "d"
+      ],
+      "answer_position": 3
+     },
+     "target_position": 1,
+     "expected_label": "b",
+     "emitted": "b",
+     "emitted_position": 1,
+     "correct": true
+    },
+    {
+     "pair": 147,
+     "family": "answerPosition",
+     "donor": {
+      "prompt": "Question: Potatoes are brown. What color are potatoes?\n1. yellow\n2. brown\n3. orange\n4. red\nAnswer:",
+      "labels": [
+       "1",
+       "2",
+       "3",
+       "4"
+      ],
+      "answer_position": 1
+     },
+     "recipient": {
+      "prompt": "Question: Potatoes are brown. What color are potatoes?\na. brown\nb. yellow\nc. orange\nd. red\nAnswer:",
+      "labels": [
+       "a",
+       "b",
+       "c",
+       "d"
+      ],
+      "answer_position": 0
+     },
+     "target_position": 1,
+     "expected_label": "b",
+     "emitted": "b",
+     "emitted_position": 1,
+     "correct": true
+    },
+    {
+     "pair": 24,
+     "family": "answerPosition",
+     "donor": {
+      "prompt": "Question: An iceberg is white. What color is an iceberg?\n1. red\n2. white\n3. orange\n4. pink\nAnswer:",
+      "labels": [
+       "1",
+       "2",
+       "3",
+       "4"
+      ],
+      "answer_position": 1
+     },
+     "recipient": {
+      "prompt": "Question: An iceberg is white. What color is an iceberg?\na. red\nb. orange\nc. white\nd. pink\nAnswer:",
+      "labels": [
+       "a",
+       "b",
+       "c",
+       "d"
+      ],
+      "answer_position": 2
+     },
+     "target_position": 1,
+     "expected_label": "b",
+     "emitted": "c",
+     "emitted_position": 2,
+     "correct": false
+    },
+    {
+     "pair": 48,
+     "family": "answerPosition",
+     "donor": {
+      "prompt": "Question: Daggers are gray. What color are daggers?\n1. blue\n2. black\n3. gray\n4. orange\nAnswer:",
+      "labels": [
+       "1",
+       "2",
+       "3",
+       "4"
+      ],
+      "answer_position": 2
+     },
+     "recipient": {
+      "prompt": "Question: Daggers are gray. What color are daggers?\na. blue\nb. gray\nc. black\nd. orange\nAnswer:",
+      "labels": [
+       "a",
+       "b",
+       "c",
+       "d"
+      ],
+      "answer_position": 1
+     },
+     "target_position": 2,
+     "expected_label": "c",
+     "emitted": "b",
+     "emitted_position": 1,
+     "correct": false
+    },
+    {
+     "pair": 129,
+     "family": "answerPosition",
+     "donor": {
+      "prompt": "Question: Burritos are brown. What color are burritos?\n1. purple\n2. black\n3. brown\n4. green\nAnswer:",
+      "labels": [
+       "1",
+       "2",
+       "3",
+       "4"
+      ],
+      "answer_position": 2
+     },
+     "recipient": {
+      "prompt": "Question: Burritos are brown. What color are burritos?\na. brown\nb. purple\nc. black\nd. green\nAnswer:",
+      "labels": [
+       "a",
+       "b",
+       "c",
+       "d"
+      ],
+      "answer_position": 0
+     },
+     "target_position": 2,
+     "expected_label": "c",
+     "emitted": "d",
+     "emitted_position": 3,
+     "correct": false
+    }
+   ]
+  },
+  "digits|digits": {
+   "eligible": 46,
+   "eligible_correct": 9,
+   "examples": [
+    {
+     "pair": 75,
+     "family": "answerPosition",
+     "donor": {
+      "prompt": "Question: Tangerines are orange. What color are tangerines?\n1. blue\n2. pink\n3. gray\n4. orange\nAnswer:",
+      "labels": [
+       "1",
+       "2",
+       "3",
+       "4"
+      ],
+      "answer_position": 3
+     },
+     "recipient": {
+      "prompt": "Question: Tangerines are orange. What color are tangerines?\n1. blue\n2. orange\n3. pink\n4. gray\nAnswer:",
+      "labels": [
+       "1",
+       "2",
+       "3",
+       "4"
+      ],
+      "answer_position": 1
+     },
+     "target_position": 3,
+     "expected_label": "4",
+     "emitted": "4",
+     "emitted_position": 3,
+     "correct": true
+    },
+    {
+     "pair": 105,
+     "family": "answerPosition",
+     "donor": {
+      "prompt": "Question: Sheep are white. What color are sheep?\n1. red\n2. orange\n3. purple\n4. white\nAnswer:",
+      "labels": [
+       "1",
+       "2",
+       "3",
+       "4"
+      ],
+      "answer_position": 3
+     },
+     "recipient": {
+      "prompt": "Question: Sheep are white. What color are sheep?\n1. red\n2. white\n3. orange\n4. purple\nAnswer:",
+      "labels": [
+       "1",
+       "2",
+       "3",
+       "4"
+      ],
+      "answer_position": 1
+     },
+     "target_position": 3,
+     "expected_label": "4",
+     "emitted": "4",
+     "emitted_position": 3,
+     "correct": true
+    },
+    {
+     "pair": 132,
+     "family": "answerPosition",
+     "donor": {
+      "prompt": "Question: Zebras are black. What color are zebras?\n1. black\n2. gray\n3. red\n4. pink\nAnswer:",
+      "labels": [
+       "1",
+       "2",
+       "3",
+       "4"
+      ],
+      "answer_position": 0
+     },
+     "recipient": {
+      "prompt": "Question: Zebras are black. What color are zebras?\n1. gray\n2. black\n3. red\n4. pink\nAnswer:",
+      "labels": [
+       "1",
+       "2",
+       "3",
+       "4"
+      ],
+      "answer_position": 1
+     },
+     "target_position": 0,
+     "expected_label": "1",
+     "emitted": "1",
+     "emitted_position": 0,
+     "correct": true
+    },
+    {
+     "pair": 51,
+     "family": "answerPosition",
+     "donor": {
+      "prompt": "Question: Coins are gray. What color are coins?\n1. brown\n2. white\n3. gray\n4. red\nAnswer:",
+      "labels": [
+       "1",
+       "2",
+       "3",
+       "4"
+      ],
+      "answer_position": 2
+     },
+     "recipient": {
+      "prompt": "Question: Coins are gray. What color are coins?\n1. brown\n2. white\n3. red\n4. gray\nAnswer:",
+      "labels": [
+       "1",
+       "2",
+       "3",
+       "4"
+      ],
+      "answer_position": 3
+     },
+     "target_position": 2,
+     "expected_label": "3",
+     "emitted": "4",
+     "emitted_position": 3,
+     "correct": false
+    },
+    {
+     "pair": 78,
+     "family": "answerPosition",
+     "donor": {
+      "prompt": "Question: A sunflower is yellow. What color is a sunflower?\n1. orange\n2. blue\n3. yellow\n4. red\nAnswer:",
+      "labels": [
+       "1",
+       "2",
+       "3",
+       "4"
+      ],
+      "answer_position": 2
+     },
+     "recipient": {
+      "prompt": "Question: A sunflower is yellow. What color is a sunflower?\n1. yellow\n2. orange\n3. blue\n4. red\nAnswer:",
+      "labels": [
+       "1",
+       "2",
+       "3",
+       "4"
+      ],
+      "answer_position": 0
+     },
+     "target_position": 2,
+     "expected_label": "3",
+     "emitted": "1",
+     "emitted_position": 0,
+     "correct": false
+    },
+    {
+     "pair": 96,
+     "family": "answerPosition",
+     "donor": {
+      "prompt": "Question: Spinach is green. What color is spinach?\n1. green\n2. red\n3. white\n4. pink\nAnswer:",
+      "labels": [
+       "1",
+       "2",
+       "3",
+       "4"
+      ],
+      "answer_position": 0
+     },
+     "recipient": {
+      "prompt": "Question: Spinach is green. What color is spinach?\n1. red\n2. white\n3. pink\n4. green\nAnswer:",
+      "labels": [
+       "1",
+       "2",
+       "3",
+       "4"
+      ],
+      "answer_position": 3
+     },
+     "target_position": 0,
+     "expected_label": "1",
+     "emitted": "4",
+     "emitted_position": 3,
+     "correct": false
+    }
+   ]
+  },
+  "digits|permuted_digits": {
+   "eligible": 30,
+   "eligible_correct": 2,
+   "examples": [
+    {
+     "pair": 18,
+     "family": "answerPosition",
+     "donor": {
+      "prompt": "Question: Bombs are black. What color are bombs?\n1. brown\n2. orange\n3. pink\n4. black\nAnswer:",
+      "labels": [
+       "1",
+       "2",
+       "3",
+       "4"
+      ],
+      "answer_position": 3
+     },
+     "recipient": {
+      "prompt": "Question: Bombs are black. What color are bombs?\n4. black\n1. brown\n3. orange\n2. pink\nAnswer:",
+      "labels": [
+       "4",
+       "1",
+       "3",
+       "2"
+      ],
+      "answer_position": 0
+     },
+     "target_position": 3,
+     "expected_label": "2",
+     "emitted": "2",
+     "emitted_position": 3,
+     "correct": true
+    },
+    {
+     "pair": 48,
+     "family": "answerPosition",
+     "donor": {
+      "prompt": "Question: Daggers are gray. What color are daggers?\n1. blue\n2. black\n3. gray\n4. orange\nAnswer:",
+      "labels": [
+       "1",
+       "2",
+       "3",
+       "4"
+      ],
+      "answer_position": 2
+     },
+     "recipient": {
+      "prompt": "Question: Daggers are gray. What color are daggers?\n3. blue\n1. gray\n2. black\n4. orange\nAnswer:",
+      "labels": [
+       "3",
+       "1",
+       "2",
+       "4"
+      ],
+      "answer_position": 1
+     },
+     "target_position": 2,
+     "expected_label": "2",
+     "emitted": "2",
+     "emitted_position": 2,
+     "correct": true
+    },
+    {
+     "pair": 33,
+     "family": "answerPosition",
+     "donor": {
+      "prompt": "Question: Lavender is purple. What color is lavender?\n1. brown\n2. purple\n3. red\n4. blue\nAnswer:",
+      "labels": [
+       "1",
+       "2",
+       "3",
+       "4"
+      ],
+      "answer_position": 1
+     },
+     "recipient": {
+      "prompt": "Question: Lavender is purple. What color is lavender?\n2. brown\n4. red\n3. blue\n1. purple\nAnswer:",
+      "labels": [
+       "2",
+       "4",
+       "3",
+       "1"
+      ],
+      "answer_position": 3
+     },
+     "target_position": 1,
+     "expected_label": "4",
+     "emitted": "1",
+     "emitted_position": 3,
+     "correct": false
+    },
+    {
+     "pair": 66,
+     "family": "answerPosition",
+     "donor": {
+      "prompt": "Question: A rainforest is green. What color is a rainforest?\n1. pink\n2. green\n3. blue\n4. white\nAnswer:",
+      "labels": [
+       "1",
+       "2",
+       "3",
+       "4"
+      ],
+      "answer_position": 1
+     },
+     "recipient": {
+      "prompt": "Question: A rainforest is green. What color is a rainforest?\n2. pink\n3. blue\n1. white\n4. green\nAnswer:",
+      "labels": [
+       "2",
+       "3",
+       "1",
+       "4"
+      ],
+      "answer_position": 3
+     },
+     "target_position": 1,
+     "expected_label": "3",
+     "emitted": "4",
+     "emitted_position": 3,
+     "correct": false
+    },
+    {
+     "pair": 111,
+     "family": "answerPosition",
+     "donor": {
+      "prompt": "Question: Busts are white. What color are busts?\n1. red\n2. black\n3. white\n4. gray\nAnswer:",
+      "labels": [
+       "1",
+       "2",
+       "3",
+       "4"
+      ],
+      "answer_position": 2
+     },
+     "recipient": {
+      "prompt": "Question: Busts are white. What color are busts?\n4. red\n1. white\n2. black\n3. gray\nAnswer:",
+      "labels": [
+       "4",
+       "1",
+       "2",
+       "3"
+      ],
+      "answer_position": 1
+     },
+     "target_position": 2,
+     "expected_label": "2",
+     "emitted": "1",
+     "emitted_position": 1,
+     "correct": false
+    }
+   ]
+  },
+  "permuted_digits|original": {
+   "eligible": 63,
+   "eligible_correct": 35,
+   "examples": [
+    {
+     "pair": 66,
+     "family": "answerPosition",
+     "donor": {
+      "prompt": "Question: A rainforest is green. What color is a rainforest?\n1. pink\n2. green\n4. blue\n3. white\nAnswer:",
+      "labels": [
+       "1",
+       "2",
+       "4",
+       "3"
+      ],
+      "answer_position": 1
+     },
+     "recipient": {
+      "prompt": "Question: A rainforest is green. What color is a rainforest?\nA. pink\nB. blue\nC. white\nD. green\nAnswer:",
+      "labels": [
+       "A",
+       "B",
+       "C",
+       "D"
+      ],
+      "answer_position": 3
+     },
+     "target_position": 1,
+     "expected_label": "B",
+     "emitted": "B",
+     "emitted_position": 1,
+     "correct": true
+    },
+    {
+     "pair": 95,
+     "family": "answerPosition_randomLetter",
+     "donor": {
+      "prompt": "Question: Croissants are brown. What color are croissants?\n3. green\n2. brown\n4. blue\n1. red\nAnswer:",
+      "labels": [
+       "3",
+       "2",
+       "4",
+       "1"
+      ],
+      "answer_position": 1
+     },
+     "recipient": {
+      "prompt": "Question: Croissants are brown. What color are croissants?\nA. brown\nB. green\nC. blue\nD. red\nAnswer:",
+      "labels": [
+       "A",
+       "B",
+       "C",
+       "D"
+      ],
+      "answer_position": 0
+     },
+     "target_position": 1,
+     "expected_label": "B",
+     "emitted": "B",
+     "emitted_position": 1,
+     "correct": true
+    },
+    {
+     "pair": 105,
+     "family": "answerPosition",
+     "donor": {
+      "prompt": "Question: Sheep are white. What color are sheep?\n4. red\n2. orange\n1. purple\n3. white\nAnswer:",
+      "labels": [
+       "4",
+       "2",
+       "1",
+       "3"
+      ],
+      "answer_position": 3
+     },
+     "recipient": {
+      "prompt": "Question: Sheep are white. What color are sheep?\nA. red\nB. white\nC. orange\nD. purple\nAnswer:",
+      "labels": [
+       "A",
+       "B",
+       "C",
+       "D"
+      ],
+      "answer_position": 1
+     },
+     "target_position": 3,
+     "expected_label": "D",
+     "emitted": "D",
+     "emitted_position": 3,
+     "correct": true
+    },
+    {
+     "pair": 45,
+     "family": "answerPosition",
+     "donor": {
+      "prompt": "Question: Lighthouses are white. What color are lighthouses?\n4. brown\n1. white\n3. gray\n2. purple\nAnswer:",
+      "labels": [
+       "4",
+       "1",
+       "3",
+       "2"
+      ],
+      "answer_position": 1
+     },
+     "recipient": {
+      "prompt": "Question: Lighthouses are white. What color are lighthouses?\nA. white\nB. brown\nC. gray\nD. purple\nAnswer:",
+      "labels": [
+       "A",
+       "B",
+       "C",
+       "D"
+      ],
+      "answer_position": 0
+     },
+     "target_position": 1,
+     "expected_label": "B",
+     "emitted": "A",
+     "emitted_position": 0,
+     "correct": false
+    },
+    {
+     "pair": 69,
+     "family": "answerPosition",
+     "donor": {
+      "prompt": "Question: Skyscrapers are gray. What color are skyscrapers?\n2. green\n4. black\n1. red\n3. gray\nAnswer:",
+      "labels": [
+       "2",
+       "4",
+       "1",
+       "3"
+      ],
+      "answer_position": 3
+     },
+     "recipient": {
+      "prompt": "Question: Skyscrapers are gray. What color are skyscrapers?\nA. green\nB. black\nC. gray\nD. red\nAnswer:",
+      "labels": [
+       "A",
+       "B",
+       "C",
+       "D"
+      ],
+      "answer_position": 2
+     },
+     "target_position": 3,
+     "expected_label": "D",
+     "emitted": "C",
+     "emitted_position": 2,
+     "correct": false
+    },
+    {
+     "pair": 111,
+     "family": "answerPosition",
+     "donor": {
+      "prompt": "Question: Busts are white. What color are busts?\n1. red\n2. black\n4. white\n3. gray\nAnswer:",
+      "labels": [
+       "1",
+       "2",
+       "4",
+       "3"
+      ],
+      "answer_position": 2
+     },
+     "recipient": {
+      "prompt": "Question: Busts are white. What color are busts?\nA. red\nB. white\nC. black\nD. gray\nAnswer:",
+      "labels": [
+       "A",
+       "B",
+       "C",
+       "D"
+      ],
+      "answer_position": 1
+     },
+     "target_position": 2,
+     "expected_label": "C",
+     "emitted": "D",
+     "emitted_position": 3,
+     "correct": false
+    }
+   ]
+  },
+  "permuted_digits|lowercase": {
+   "eligible": 63,
+   "eligible_correct": 30,
+   "examples": [
+    {
+     "pair": 38,
+     "family": "answerPosition_randomLetter",
+     "donor": {
+      "prompt": "Question: A duckling is yellow. What color is a duckling?\n3. blue\n4. green\n1. purple\n2. yellow\nAnswer:",
+      "labels": [
+       "3",
+       "4",
+       "1",
+       "2"
+      ],
+      "answer_position": 3
+     },
+     "recipient": {
+      "prompt": "Question: A duckling is yellow. What color is a duckling?\na. blue\nb. yellow\nc. green\nd. purple\nAnswer:",
+      "labels": [
+       "a",
+       "b",
+       "c",
+       "d"
+      ],
+      "answer_position": 1
+     },
+     "target_position": 3,
+     "expected_label": "d",
+     "emitted": "d",
+     "emitted_position": 3,
+     "correct": true
+    },
+    {
+     "pair": 84,
+     "family": "answerPosition",
+     "donor": {
+      "prompt": "Question: Bananas are yellow. What color are bananas?\n1. yellow\n2. black\n4. orange\n3. blue\nAnswer:",
+      "labels": [
+       "1",
+       "2",
+       "4",
+       "3"
+      ],
+      "answer_position": 0
+     },
+     "recipient": {
+      "prompt": "Question: Bananas are yellow. What color are bananas?\na. black\nb. orange\nc. yellow\nd. blue\nAnswer:",
+      "labels": [
+       "a",
+       "b",
+       "c",
+       "d"
+      ],
+      "answer_position": 2
+     },
+     "target_position": 0,
+     "expected_label": "a",
+     "emitted": "a",
+     "emitted_position": 0,
+     "correct": true
+    },
+    {
+     "pair": 110,
+     "family": "answerPosition_randomLetter",
+     "donor": {
+      "prompt": "Question: Garlic is white. What color is garlic?\n1. pink\n3. yellow\n2. orange\n4. white\nAnswer:",
+      "labels": [
+       "1",
+       "3",
+       "2",
+       "4"
+      ],
+      "answer_position": 3
+     },
+     "recipient": {
+      "prompt": "Question: Garlic is white. What color is garlic?\na. white\nb. pink\nc. yellow\nd. orange\nAnswer:",
+      "labels": [
+       "a",
+       "b",
+       "c",
+       "d"
+      ],
+      "answer_position": 0
+     },
+     "target_position": 3,
+     "expected_label": "d",
+     "emitted": "d",
+     "emitted_position": 3,
+     "correct": true
+    },
+    {
+     "pair": 62,
+     "family": "answerPosition_randomLetter",
+     "donor": {
+      "prompt": "Question: The sun is yellow. What color is the sun?\n4. gray\n1. black\n2. yellow\n3. blue\nAnswer:",
+      "labels": [
+       "4",
+       "1",
+       "2",
+       "3"
+      ],
+      "answer_position": 2
+     },
+     "recipient": {
+      "prompt": "Question: The sun is yellow. What color is the sun?\na. yellow\nb. gray\nc. black\nd. blue\nAnswer:",
+      "labels": [
+       "a",
+       "b",
+       "c",
+       "d"
+      ],
+      "answer_position": 0
+     },
+     "target_position": 2,
+     "expected_label": "c",
+     "emitted": "b",
+     "emitted_position": 1,
+     "correct": false
+    },
+    {
+     "pair": 92,
+     "family": "answerPosition_randomLetter",
+     "donor": {
+      "prompt": "Question: Marshmallows are white. What color are marshmallows?\n3. pink\n1. white\n4. yellow\n2. purple\nAnswer:",
+      "labels": [
+       "3",
+       "1",
+       "4",
+       "2"
+      ],
+      "answer_position": 1
+     },
+     "recipient": {
+      "prompt": "Question: Marshmallows are white. What color are marshmallows?\na. pink\nb. yellow\nc. purple\nd. white\nAnswer:",
+      "labels": [
+       "a",
+       "b",
+       "c",
+       "d"
+      ],
+      "answer_position": 3
+     },
+     "target_position": 1,
+     "expected_label": "b",
+     "emitted": "a",
+     "emitted_position": 0,
+     "correct": false
+    },
+    {
+     "pair": 107,
+     "family": "answerPosition_randomLetter",
+     "donor": {
+      "prompt": "Question: Sheep are white. What color are sheep?\n1. red\n4. orange\n2. purple\n3. white\nAnswer:",
+      "labels": [
+       "1",
+       "4",
+       "2",
+       "3"
+      ],
+      "answer_position": 3
+     },
+     "recipient": {
+      "prompt": "Question: Sheep are white. What color are sheep?\na. red\nb. white\nc. orange\nd. purple\nAnswer:",
+      "labels": [
+       "a",
+       "b",
+       "c",
+       "d"
+      ],
+      "answer_position": 1
+     },
+     "target_position": 3,
+     "expected_label": "d",
+     "emitted": "c",
+     "emitted_position": 2,
+     "correct": false
+    }
+   ]
+  },
+  "permuted_digits|digits": {
+   "eligible": 60,
+   "eligible_correct": 7,
+   "examples": [
+    {
+     "pair": 18,
+     "family": "answerPosition",
+     "donor": {
+      "prompt": "Question: Bombs are black. What color are bombs?\n1. brown\n2. orange\n3. pink\n4. black\nAnswer:",
+      "labels": [
+       "1",
+       "2",
+       "3",
+       "4"
+      ],
+      "answer_position": 3
+     },
+     "recipient": {
+      "prompt": "Question: Bombs are black. What color are bombs?\n1. black\n2. brown\n3. orange\n4. pink\nAnswer:",
+      "labels": [
+       "1",
+       "2",
+       "3",
+       "4"
+      ],
+      "answer_position": 0
+     },
+     "target_position": 3,
+     "expected_label": "4",
+     "emitted": "4",
+     "emitted_position": 3,
+     "correct": true
+    },
+    {
+     "pair": 38,
+     "family": "answerPosition_randomLetter",
+     "donor": {
+      "prompt": "Question: A duckling is yellow. What color is a duckling?\n3. blue\n4. green\n1. purple\n2. yellow\nAnswer:",
+      "labels": [
+       "3",
+       "4",
+       "1",
+       "2"
+      ],
+      "answer_position": 3
+     },
+     "recipient": {
+      "prompt": "Question: A duckling is yellow. What color is a duckling?\n1. blue\n2. yellow\n3. green\n4. purple\nAnswer:",
+      "labels": [
+       "1",
+       "2",
+       "3",
+       "4"
+      ],
+      "answer_position": 1
+     },
+     "target_position": 3,
+     "expected_label": "4",
+     "emitted": "4",
+     "emitted_position": 3,
+     "correct": true
+    },
+    {
+     "pair": 126,
+     "family": "answerPosition",
+     "donor": {
+      "prompt": "Question: Chocolates are brown. What color are chocolates?\n2. white\n3. red\n1. orange\n4. brown\nAnswer:",
+      "labels": [
+       "2",
+       "3",
+       "1",
+       "4"
+      ],
+      "answer_position": 3
+     },
+     "recipient": {
+      "prompt": "Question: Chocolates are brown. What color are chocolates?\n1. brown\n2. white\n3. red\n4. orange\nAnswer:",
+      "labels": [
+       "1",
+       "2",
+       "3",
+       "4"
+      ],
+      "answer_position": 0
+     },
+     "target_position": 3,
+     "expected_label": "4",
+     "emitted": "4",
+     "emitted_position": 3,
+     "correct": true
+    },
+    {
+     "pair": 51,
+     "family": "answerPosition",
+     "donor": {
+      "prompt": "Question: Coins are gray. What color are coins?\n4. brown\n2. white\n3. gray\n1. red\nAnswer:",
+      "labels": [
+       "4",
+       "2",
+       "3",
+       "1"
+      ],
+      "answer_position": 2
+     },
+     "recipient": {
+      "prompt": "Question: Coins are gray. What color are coins?\n1. brown\n2. white\n3. red\n4. gray\nAnswer:",
+      "labels": [
+       "1",
+       "2",
+       "3",
+       "4"
+      ],
+      "answer_position": 3
+     },
+     "target_position": 2,
+     "expected_label": "3",
+     "emitted": "4",
+     "emitted_position": 3,
+     "correct": false
+    },
+    {
+     "pair": 78,
+     "family": "answerPosition",
+     "donor": {
+      "prompt": "Question: A sunflower is yellow. What color is a sunflower?\n2. orange\n3. blue\n1. yellow\n4. red\nAnswer:",
+      "labels": [
+       "2",
+       "3",
+       "1",
+       "4"
+      ],
+      "answer_position": 2
+     },
+     "recipient": {
+      "prompt": "Question: A sunflower is yellow. What color is a sunflower?\n1. yellow\n2. orange\n3. blue\n4. red\nAnswer:",
+      "labels": [
+       "1",
+       "2",
+       "3",
+       "4"
+      ],
+      "answer_position": 0
+     },
+     "target_position": 2,
+     "expected_label": "3",
+     "emitted": "1",
+     "emitted_position": 0,
+     "correct": false
+    },
+    {
+     "pair": 114,
+     "family": "answerPosition",
+     "donor": {
+      "prompt": "Question: Eggs are white. What color are eggs?\n4. gray\n1. white\n2. purple\n3. green\nAnswer:",
+      "labels": [
+       "4",
+       "1",
+       "2",
+       "3"
+      ],
+      "answer_position": 1
+     },
+     "recipient": {
+      "prompt": "Question: Eggs are white. What color are eggs?\n1. white\n2. gray\n3. purple\n4. green\nAnswer:",
+      "labels": [
+       "1",
+       "2",
+       "3",
+       "4"
+      ],
+      "answer_position": 0
+     },
+     "target_position": 1,
+     "expected_label": "2",
+     "emitted": "1",
+     "emitted_position": 0,
+     "correct": false
+    }
+   ]
+  },
+  "permuted_digits|permuted_digits": {
+   "eligible": 36,
+   "eligible_correct": 1,
+   "examples": [
+    {
+     "pair": 18,
+     "family": "answerPosition",
+     "donor": {
+      "prompt": "Question: Bombs are black. What color are bombs?\n1. brown\n2. orange\n3. pink\n4. black\nAnswer:",
+      "labels": [
+       "1",
+       "2",
+       "3",
+       "4"
+      ],
+      "answer_position": 3
+     },
+     "recipient": {
+      "prompt": "Question: Bombs are black. What color are bombs?\n4. black\n1. brown\n3. orange\n2. pink\nAnswer:",
+      "labels": [
+       "4",
+       "1",
+       "3",
+       "2"
+      ],
+      "answer_position": 0
+     },
+     "target_position": 3,
+     "expected_label": "2",
+     "emitted": "2",
+     "emitted_position": 3,
+     "correct": true
+    },
+    {
+     "pair": 63,
+     "family": "answerPosition",
+     "donor": {
+      "prompt": "Question: Blueberries are blue. What color are blueberries?\n4. blue\n1. white\n3. black\n2. yellow\nAnswer:",
+      "labels": [
+       "4",
+       "1",
+       "3",
+       "2"
+      ],
+      "answer_position": 0
+     },
+     "recipient": {
+      "prompt": "Question: Blueberries are blue. What color are blueberries?\n2. white\n4. black\n1. blue\n3. yellow\nAnswer:",
+      "labels": [
+       "2",
+       "4",
+       "1",
+       "3"
+      ],
+      "answer_position": 2
+     },
+     "target_position": 0,
+     "expected_label": "2",
+     "emitted": "1",
+     "emitted_position": 2,
+     "correct": false
+    },
+    {
+     "pair": 96,
+     "family": "answerPosition",
+     "donor": {
+      "prompt": "Question: Spinach is green. What color is spinach?\n1. green\n4. red\n2. white\n3. pink\nAnswer:",
+      "labels": [
+       "1",
+       "4",
+       "2",
+       "3"
+      ],
+      "answer_position": 0
+     },
+     "recipient": {
+      "prompt": "Question: Spinach is green. What color is spinach?\n2. red\n1. white\n3. pink\n4. green\nAnswer:",
+      "labels": [
+       "2",
+       "1",
+       "3",
+       "4"
+      ],
+      "answer_position": 3
+     },
+     "target_position": 0,
+     "expected_label": "2",
+     "emitted": "4",
+     "emitted_position": 3,
+     "correct": false
+    },
+    {
+     "pair": 111,
+     "family": "answerPosition",
+     "donor": {
+      "prompt": "Question: Busts are white. What color are busts?\n1. red\n2. black\n4. white\n3. gray\nAnswer:",
+      "labels": [
+       "1",
+       "2",
+       "4",
+       "3"
+      ],
+      "answer_position": 2
+     },
+     "recipient": {
+      "prompt": "Question: Busts are white. What color are busts?\n4. red\n1. white\n2. black\n3. gray\nAnswer:",
+      "labels": [
+       "4",
+       "1",
+       "2",
+       "3"
+      ],
+      "answer_position": 1
+     },
+     "target_position": 2,
+     "expected_label": "2",
+     "emitted": "1",
+     "emitted_position": 1,
+     "correct": false
+    }
+   ]
+  }
+ },
+ "example_selection": "per cell, up to 3 successes and 3 failures drawn with seed 20261116 from the answerPosition and answerPosition_randomLetter pairs whose donor and recipient the model answers correctly under their own encodings and whose answer positions differ",
+ "scoring": "greedy, first generated field with punctuation stripped, exact case-sensitive label"
+}

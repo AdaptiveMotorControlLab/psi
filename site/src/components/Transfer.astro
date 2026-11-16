@@ -1,0 +1,232 @@
+---
+// Encoding transfer (paper appendix, "Transfer across answer encodings").
+// Rates: seed means over the 150 test pairs. Examples: seed-11 records chosen by
+// a fixed rule. Both arrive through src/data/transfer.json, exported from the
+// experiments reported in the paper.
+import transfer from "../data/transfer.json";
+import palette from "../data/palette.json";
+import M from "./M.astro";
+
+const encodings = transfer.encodings;
+const soft = transfer.grid.soft as Record<string, { value: number; display: string }>;
+const seq = palette.sequential;
+function fill(v: number) {
+  const x = Math.max(0, Math.min(1, v)) * (seq.length - 1);
+  const i = Math.min(seq.length - 2, Math.floor(x));
+  return `color-mix(in srgb, ${seq[i]} ${Math.round(100 * (1 - (x - i)))}%, ${seq[i + 1]})`;
+}
+function ink(v: number) { return v > 0.55 ? "#ffffff" : palette.ink[0]; }
+const defaults = { donor: "digits", recipient: "original" };
+---
+<div class="transfer" data-default-donor={defaults.donor} data-default-recipient={defaults.recipient}>
+  <div class="transfer-pick">
+    <div class="pick-row">
+      <span class="pick-label donor-ink">donor labels</span>
+      <div class="seg mono" role="group" aria-label="Donor encoding" data-role="donor">
+        {encodings.map((e) => <button type="button" data-key={e.key} aria-pressed={String(e.key === defaults.donor)}>{e.label}</button>)}
+      </div>
+    </div>
+    <div class="pick-row">
+      <span class="pick-label recipient-ink">recipient labels</span>
+      <div class="seg mono" role="group" aria-label="Recipient encoding" data-role="recipient">
+        {encodings.map((e) => <button type="button" data-key={e.key} aria-pressed={String(e.key === defaults.recipient)}>{e.label}</button>)}
+      </div>
+    </div>
+    <div class="grid-wrap">
+      <div class="grid" role="grid" aria-label="Psi transfer rate by donor and recipient encoding">
+        <div class="corner muted"><span class="donor-ink">donor</span> ↓ <span class="recipient-ink">recipient</span> →</div>
+        {encodings.map((e) => <div class="col-head mono" set:html={e.label.replace("perm. ", "perm.<br>")} />)}
+        {encodings.map((d) => (
+          <>
+            <div class="row-head mono">{d.label}</div>
+            {encodings.map((r) => {
+              const c = soft[`${d.key}|${r.key}`];
+              return (
+                <button type="button" class="cell" role="gridcell" data-donor={d.key} data-recipient={r.key}
+                  style={`background:${fill(c.value)};color:${ink(c.value)}`}
+                  aria-label={`donor ${d.label}, recipient ${r.label}: ${c.display}%`}>{c.display}</button>
+              );
+            })}
+          </>
+        ))}
+      </div>
+      <p class="small muted grid-note"><M t={String.raw`\Psi`} />, mean of three seeds, % of {transfer.pairs.display} test pairs</p>
+    </div>
+  </div>
+
+  <div class="transfer-read">
+    <div class="rate">
+      <div class="rate-big"><span data-out="psi"></span><span class="unit">%</span></div>
+      <p class="rate-text">of test pairs where the edited recipient answers at the donor's position, written in its own labels.</p>
+      <div class="compare">
+        <div class="cmp"><span class="cmp-name"><M t={String.raw`\Psi`} /></span><span class="cmp-track"><span class="cmp-bar psi-bar" data-bar="psi"></span></span><span class="cmp-val" data-out="psi2"></span></div>
+        <div class="cmp"><span class="cmp-name">DAS</span><span class="cmp-track"><span class="cmp-bar das-bar" data-bar="das"></span></span><span class="cmp-val" data-out="das"></span></div>
+        <div class="cmp"><span class="cmp-name">no edit</span><span class="cmp-track"><span class="cmp-bar none-bar" data-bar="none"></span></span><span class="cmp-val" data-out="none"></span></div>
+      </div>
+      <p class="small muted" data-out="native"></p>
+    </div>
+
+    <div class="example">
+      <div class="example-head">
+        <div class="seg" role="group" aria-label="Example outcome" data-role="outcome">
+          <button type="button" data-key="ok" aria-pressed="true">success</button>
+          <button type="button" data-key="fail" aria-pressed="false">failure</button>
+        </div>
+        <button type="button" class="button next">next example <span data-out="count"></span></button>
+      </div>
+      <div class="example-body">
+        <div class="ex-side">
+          <div class="ex-title"><span class="role donor-ink">donor <M t={String.raw`\mathbf{s}`} /></span> <span data-out="donor-answer"></span></div>
+          <div class="prompt mono" data-out="donor-prompt"></div>
+        </div>
+        <div class="ex-side">
+          <div class="ex-title"><span class="role recipient-ink">recipient <M t={String.raw`\mathbf{b}`} /></span> <span data-out="recipient-answer"></span></div>
+          <div class="prompt mono" data-out="recipient-prompt"></div>
+        </div>
+      </div>
+      <p class="ex-verdict" data-out="verdict"></p>
+      <p class="small muted" data-out="pool"></p>
+    </div>
+  </div>
+</div>
+
+<script>
+  import transfer from "../data/transfer.json";
+
+  const ORDINAL = ["first", "second", "third", "fourth"];
+  type Example = (typeof transfer.examples)[keyof typeof transfer.examples]["examples"][number];
+
+  for (const host of document.querySelectorAll<HTMLElement>(".transfer")) {
+    const state = { donor: host.dataset.defaultDonor!, recipient: host.dataset.defaultRecipient!, outcome: "ok", index: 0 };
+    const out = (k: string) => host.querySelector<HTMLElement>(`[data-out="${k}"]`)!;
+    const label = (key: string) => transfer.encodings.find((e) => e.key === key)!.label;
+    const grid = transfer.grid as Record<string, Record<string, { value: number; display: string }>>;
+
+    function prompt(target: HTMLElement, text: string, marks: Record<number, string>) {
+      target.replaceChildren();
+      let option = 0;
+      for (const line of text.split("\n")) {
+        const div = document.createElement("div");
+        div.className = "line";
+        div.textContent = line;
+        if (/^\S{1,2}\. /.test(line)) {
+          const cls = marks[option++];
+          if (cls) div.classList.add(...cls.split(" "));
+        }
+        target.appendChild(div);
+      }
+    }
+
+    function render() {
+      const key = `${state.donor}|${state.recipient}`;
+      host.querySelectorAll<HTMLButtonElement>('[data-role="donor"] button').forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.key === state.donor)));
+      host.querySelectorAll<HTMLButtonElement>('[data-role="recipient"] button').forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.key === state.recipient)));
+      host.querySelectorAll<HTMLButtonElement>(".cell").forEach((c) => c.classList.toggle("selected", `${c.dataset.donor}|${c.dataset.recipient}` === key));
+
+      const psi = grid.soft[key], das = grid.das[key], none = grid.no_edit[key];
+      out("psi").textContent = psi.display;
+      out("psi2").textContent = psi.display;
+      out("das").textContent = das.display;
+      out("none").textContent = none.display;
+      host.querySelector<HTMLElement>('[data-bar="psi"]')!.style.width = `${100 * psi.value}%`;
+      host.querySelector<HTMLElement>('[data-bar="das"]')!.style.width = `${100 * das.value}%`;
+      host.querySelector<HTMLElement>('[data-bar="none"]')!.style.width = `${100 * none.value}%`;
+      const native = (transfer.native as Record<string, { display: string }>)[state.recipient].display;
+      out("native").textContent = `Before any edit, the model answers ${native}% of test prompts correctly with ${label(state.recipient)} labels. DAS is trained at the same budget; "no edit" leaves the recipient alone.`;
+
+      const cell = (transfer.examples as Record<string, { eligible: number; eligible_correct: number; examples: Example[] }>)[key];
+      const group = cell.examples.filter((e) => e.correct === (state.outcome === "ok"));
+      const failButton = host.querySelector<HTMLButtonElement>('[data-role="outcome"] [data-key="fail"]')!;
+      const okButton = host.querySelector<HTMLButtonElement>('[data-role="outcome"] [data-key="ok"]')!;
+      failButton.disabled = !cell.examples.some((e) => !e.correct);
+      okButton.disabled = !cell.examples.some((e) => e.correct);
+      host.querySelectorAll<HTMLButtonElement>('[data-role="outcome"] button').forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.key === state.outcome)));
+      out("pool").textContent = `Examples come from pairs where the answer has to move to a new position. Seed 11 gets ${cell.eligible_correct} of ${cell.eligible} such pairs right in this cell.`;
+      if (!group.length) {
+        out("count").textContent = "";
+        out("verdict").textContent = state.outcome === "ok" ? "No success among these pairs." : "No failure among these pairs.";
+        out("donor-prompt").replaceChildren(); out("recipient-prompt").replaceChildren();
+        out("donor-answer").textContent = ""; out("recipient-answer").textContent = "";
+        return;
+      }
+      const ex = group[state.index % group.length];
+      out("count").textContent = `${(state.index % group.length) + 1}/${group.length}`;
+      const dLabel = ex.donor.labels[ex.donor.answer_position];
+      const rBefore = ex.recipient.labels[ex.recipient.answer_position];
+      prompt(out("donor-prompt"), ex.donor.prompt, { [ex.donor.answer_position]: "hl-donor" });
+      const marks: Record<number, string> = { [ex.recipient.answer_position]: "hl-recipient-soft" };
+      marks[ex.target_position] = ex.correct ? "hl-edited" : "hl-target";
+      if (!ex.correct && ex.emitted_position >= 0) marks[ex.emitted_position] = (marks[ex.emitted_position] ?? "") + " hl-wrong";
+      prompt(out("recipient-prompt"), ex.recipient.prompt, marks);
+      out("donor-answer").innerHTML = `answers <b class="mono">${dLabel}</b>`;
+      out("recipient-answer").innerHTML = `answered <b class="mono">${rBefore}</b> before the edit`;
+      const pos = ORDINAL[ex.target_position];
+      const said = ex.emitted || "nothing usable";
+      out("verdict").innerHTML = ex.correct
+        ? `The donor picks its ${pos} option. After the swap the recipient answers <b class="mono psi-ink">${said}</b>, its own label for the ${pos} option. <span class="ok">✓</span>`
+        : `The donor picks its ${pos} option, so the recipient should answer <b class="mono">${ex.expected_label}</b>. It answers <b class="mono">${said}</b>. <span class="bad">✗</span>`;
+    }
+
+    host.querySelectorAll<HTMLButtonElement>('[data-role="donor"] button').forEach((b) => b.addEventListener("click", () => { state.donor = b.dataset.key!; state.index = 0; render(); }));
+    host.querySelectorAll<HTMLButtonElement>('[data-role="recipient"] button').forEach((b) => b.addEventListener("click", () => { state.recipient = b.dataset.key!; state.index = 0; render(); }));
+    host.querySelectorAll<HTMLButtonElement>(".cell").forEach((c) => c.addEventListener("click", () => { state.donor = c.dataset.donor!; state.recipient = c.dataset.recipient!; state.index = 0; render(); }));
+    host.querySelectorAll<HTMLButtonElement>('[data-role="outcome"] button').forEach((b) => b.addEventListener("click", () => { state.outcome = b.dataset.key!; state.index = 0; render(); }));
+    host.querySelector(".next")!.addEventListener("click", () => { state.index += 1; render(); });
+    render();
+  }
+</script>
+
+<style is:global>
+  .transfer { display: grid; grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr); gap: 48px; align-items: start; }
+  .pick-row { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 14px; margin-bottom: 12px; }
+  .pick-label { font-style: italic; width: 8.6rem; }
+  .grid-wrap { margin-top: 22px; }
+  .grid { display: grid; grid-template-columns: auto repeat(4, minmax(0, 1fr)); gap: 2px; max-width: 440px; }
+  .grid .corner { font-size: 0.78rem; font-style: italic; align-self: end; padding: 0 8px 4px 0; line-height: 1.3; }
+  .grid .col-head, .grid .row-head { font-family: var(--mono); font-size: 0.85rem; line-height: 1.15; color: var(--ink-soft); display: grid; place-items: center; padding: 4px; text-align: center; white-space: nowrap; }
+  .grid .row-head { justify-items: end; padding-right: 10px; }
+  .cell { border: 0; border-radius: 0; aspect-ratio: 1.45; font: 400 0.95rem/1 var(--serif); cursor: pointer; outline: 2px solid transparent; outline-offset: -2px; transition: outline-color 0.15s ease; }
+  .cell:hover { outline-color: var(--rule-strong); }
+  .cell.selected { outline: 2.5px solid var(--ink); outline-offset: 1px; }
+  .grid-note { margin-top: 10px; font-style: italic; }
+
+  .rate-big { font-size: clamp(3rem, 7vw, 4.4rem); line-height: 1; color: var(--psi-ink); }
+  .rate-big .unit { font-size: 0.5em; margin-left: 2px; }
+  .rate-text { margin: 8px 0 16px; color: var(--ink-soft); }
+  .compare { display: grid; gap: 7px; margin-bottom: 12px; max-width: 480px; }
+  .cmp { display: grid; grid-template-columns: 4.2rem 1fr 3rem; align-items: center; gap: 10px; font-size: 0.95rem; }
+  .cmp-name { color: var(--ink-soft); font-style: italic; }
+  .cmp-track { height: 8px; background: var(--rule); }
+  .cmp-bar { display: block; height: 100%; transition: width 0.35s ease; }
+  .psi-bar { background: var(--psi); }
+  .das-bar { background: var(--ink-soft); }
+  .none-bar { background: var(--trivial); }
+  .cmp-val { text-align: right; }
+
+  .example { margin-top: 26px; border-top: 1px solid var(--rule-strong); padding-top: 16px; }
+  .example-head { display: flex; flex-wrap: wrap; gap: 10px; justify-content: space-between; align-items: center; margin-bottom: 14px; }
+  .example-head .button { padding: 0.2rem 0.75rem; font-size: 0.92rem; }
+  .seg button:disabled { opacity: 0.35; cursor: not-allowed; }
+  .example-body { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  .ex-title { display: flex; flex-wrap: wrap; gap: 4px 8px; align-items: baseline; margin-bottom: 6px; color: var(--ink-soft); font-size: 0.95rem; }
+  .ex-title .role { font-style: italic; font-size: 1.05rem; }
+  .ex-title b { font-family: var(--mono); font-weight: 400; color: var(--ink); }
+  .example .prompt { min-height: 0; font-size: 0.82rem; }
+  .prompt .hl-recipient-soft { border-left-color: var(--recipient); color: var(--recipient-ink); }
+  .prompt .hl-target { box-shadow: inset 0 0 0 1px var(--psi); }
+  .prompt .hl-wrong { text-decoration: line-through; text-decoration-color: var(--ink-muted); }
+  .ex-verdict { margin: 14px 0 4px; }
+  .ex-verdict b { font-weight: 400; }
+  .ex-verdict .ok { color: var(--psi-ink); }
+  .ex-verdict .bad { color: var(--ink-muted); }
+  [data-out="pool"], [data-out="native"] { font-style: italic; }
+
+  @media (max-width: 860px) {
+    .transfer { grid-template-columns: minmax(0, 1fr); gap: 32px; }
+    .pick-label { width: auto; flex-basis: 100%; }
+  }
+  @media (max-width: 480px) {
+    .example-body { grid-template-columns: 1fr; }
+    .cell { font-size: 0.82rem; }
+  }
+</style>

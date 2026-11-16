@@ -1,0 +1,18 @@
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.pytest_cache/
+
+# Created by psi-train in the working directory: the task cache (model
+# readings, activations) and runs. Anchored, so psi/data/ is not matched.
+/data/
+/runs/
+
+# Project page
+site/node_modules/
+site/dist/
+site/.astro/
+site/screenshots/
+site/recordings/

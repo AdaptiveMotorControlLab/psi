@@ -1,0 +1,84 @@
+/* Type and layout, after the lab's slides: Computer Modern, centred titles,
+   grey subtitles, labelled hairlines, no boxes. Colour tokens live in
+   layouts/Base.astro. */
+:root {
+  --serif: "CMU Serif", "Latin Modern Roman", "Computer Modern Serif", "Times New Roman", serif;
+  --mono: "CMU Typewriter Text", "Latin Modern Mono", ui-monospace, Menlo, Consolas, monospace;
+}
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font: 400 19px/1.55 var(--serif);
+  font-kerning: normal;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+a { color: inherit; text-decoration-color: var(--rule-strong); text-underline-offset: 3px; }
+a:hover { text-decoration-color: var(--psi); }
+code, pre, .mono { font-family: var(--mono); }
+h1, h2, h3 { font-weight: 400; line-height: 1.2; margin: 0; }
+p { margin: 0 0 1rem; }
+b, strong { font-weight: 700; }
+.katex { font-size: 1.04em; }
+.katex-display { margin: 0.7em 0; overflow-x: auto; overflow-y: hidden; padding: 2px 0; }
+
+.wrap { max-width: 1160px; margin: 0 auto; padding: 0 16px; }
+.narrow { max-width: 780px; margin-left: auto; margin-right: auto; }
+section.block { padding: 84px 0 24px; scroll-margin-top: 70px; }
+
+/* Slide-like section heads */
+.slide-title { text-align: center; font-size: clamp(1.75rem, 3.6vw, 2.5rem); letter-spacing: 0.005em; margin-bottom: 0.45rem; }
+.slide-sub { text-align: center; color: var(--ink-soft); font-size: 1.12rem; max-width: 800px; margin: 0 auto 2.2rem; }
+
+/* A hairline with a label in its middle */
+.rule-label { display: flex; align-items: center; gap: 0.9rem; color: var(--ink-muted); font-size: 0.92rem; margin: 2.4rem 0 1.4rem; }
+.rule-label::before, .rule-label::after { content: ""; flex: 1; height: 1px; background: var(--rule-strong); }
+
+/* Coloured italic annotations */
+.note { font-style: italic; }
+.psi-ink { color: var(--psi-ink); }
+.donor-ink { color: var(--donor-ink); }
+.recipient-ink { color: var(--recipient-ink); }
+.muted { color: var(--ink-muted); }
+.soft { color: var(--ink-soft); }
+.small { font-size: 0.88rem; }
+
+/* Buttons: hairline boxes, square corners */
+.button {
+  display: inline-flex; align-items: center; gap: 0.45rem;
+  padding: 0.32rem 0.95rem; border: 1px solid var(--rule-strong); border-radius: 2px;
+  background: transparent; color: var(--ink); font: inherit; font-size: 1rem; text-decoration: none; cursor: pointer;
+  transition: border-color 0.15s ease, color 0.15s ease, background-color 0.15s ease;
+}
+.button:hover { border-color: var(--psi); color: var(--psi-ink); }
+.button:focus-visible, .seg button:focus-visible, .cell:focus-visible { outline: 1.5px solid var(--psi); outline-offset: 2px; }
+.button svg { width: 1em; height: 1em; }
+.button[data-placeholder="true"]::after { content: "soon"; font-style: italic; font-size: 0.78rem; color: var(--ink-muted); }
+
+/* Toggles */
+.seg { display: inline-flex; flex-wrap: wrap; border: 1px solid var(--rule-strong); border-radius: 2px; }
+.seg button {
+  font: inherit; font-size: 0.95rem; padding: 0.28rem 0.75rem; border: 0; border-right: 1px solid var(--rule); border-radius: 0;
+  background: transparent; color: var(--ink-soft); cursor: pointer;
+}
+.seg button:last-child { border-right: 0; }
+.seg button:hover { color: var(--ink); background: var(--hover); }
+.seg button[aria-pressed="true"] { background: var(--ink); color: var(--bg); }
+.seg.mono button { font-family: var(--mono); }
+
+/* Paper figures are drawn for a white page; on black they are inverted, keeping hue. */
+.paper-figure { margin: 0; }
+.paper-figure img { display: block; width: 100%; height: auto; filter: var(--figure-filter); }
+.paper-figure.on-white img { filter: none; background: #fff; padding: 12px; border-radius: 2px; }
+.paper-figure figcaption { font-size: 0.9rem; color: var(--ink-muted); margin-top: 0.8rem; text-align: center; }
+
+@media (max-width: 640px) {
+  body { font-size: 17.5px; }
+  section.block { padding: 60px 0 16px; }
+  .slide-sub { font-size: 1.02rem; }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }

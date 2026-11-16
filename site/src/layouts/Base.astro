@@ -1,0 +1,72 @@
+---
+// Page shell: fonts, theme tokens, theme before first paint.
+//
+// Dark is the default and follows the lab's slides: black page, Computer
+// Modern, colour only where it carries meaning. Light is the paper: white page,
+// the paper's ink. The chromatic tokens are the paper's figure palette
+// (src/data/palette.json); only the neutrals are chosen here.
+import palette from "../data/palette.json";
+import { page } from "../config.mjs";
+import "computer-modern/cmu-serif.css";
+import "computer-modern/cmu-typewriter-text.css";
+import "katex/dist/katex.min.css";
+import "../styles/global.css";
+
+interface Props { title: string; description?: string; embed?: boolean }
+const { title, description = "", embed = false } = Astro.props;
+
+const [ours0, ours1, ours2] = palette.ours;
+const [frozen0, frozen1, frozen2] = palette.frozen;
+const [ink, inkSoft, inkMuted] = palette.ink;
+const seq = palette.sequential;
+
+const dark = `
+  color-scheme: dark;
+  --bg: #000000; --rule: #2b2b2b; --rule-strong: #4d4d4d; --hover: #141414;
+  --ink: #f1f1f1; --ink-soft: #b3b3b3; --ink-muted: #737373;
+  --psi: ${ours1}; --psi-ink: ${ours2}; --psi-wash: ${ours1}33;
+  --donor: ${frozen1}; --donor-ink: ${frozen2}; --donor-wash: ${frozen1}30;
+  --recipient: ${palette.reference}; --recipient-ink: #a9bde0; --recipient-wash: ${palette.reference}38;
+  --trivial: #5b5b59; --on-accent: #000000;
+  --figure-filter: invert(1) hue-rotate(180deg);
+`;
+const light = `
+  color-scheme: light;
+  --bg: #ffffff; --rule: #e2e2df; --rule-strong: #b9b9b5; --hover: #f4f4f2;
+  --ink: ${ink}; --ink-soft: ${inkSoft}; --ink-muted: ${inkMuted};
+  --psi: ${ours0}; --psi-ink: ${ours0}; --psi-wash: ${ours2}38;
+  --donor: ${frozen0}; --donor-ink: ${frozen0}; --donor-wash: ${frozen2}38;
+  --recipient: ${palette.reference}; --recipient-ink: #3f5f96; --recipient-wash: ${palette.reference}30;
+  --trivial: ${palette.trivial}; --on-accent: #ffffff;
+  --figure-filter: none;
+`;
+const tokens = `
+:root { ${seq.map((c, i) => `--seq-${i}: ${c};`).join(" ")} ${dark} }
+:root[data-theme="light"] { ${light} }
+`;
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+---
+<!doctype html>
+<html lang="en" class={embed ? "embed" : undefined}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    {description && <meta name="description" content={description} />}
+    {!embed && <link rel="canonical" href={page} />}
+    <link rel="icon" href={`${base}/favicon.svg`} type="image/svg+xml" />
+    <style is:inline set:html={tokens}></style>
+    <script is:inline>
+      // ?theme= wins (slides, screenshots), then the reader's saved choice; dark otherwise.
+      (function () {
+        var theme = null;
+        try { theme = new URLSearchParams(location.search).get("theme"); } catch (e) {}
+        if (!theme) { try { theme = localStorage.getItem("psi-theme"); } catch (e) {} }
+        document.documentElement.dataset.theme = theme === "light" ? "light" : "dark";
+      })();
+    </script>
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

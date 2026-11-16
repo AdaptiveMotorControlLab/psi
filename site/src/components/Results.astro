@@ -1,0 +1,86 @@
+---
+// Key results. Every number arrives through src/data/results.json, exported
+// from the experiments reported in the paper and checked against the manuscript.
+import results from "../data/results.json";
+import Bars from "./Bars.astro";
+
+const { parity, no_gold: noGold, arc, control } = results;
+---
+<div class="cards">
+  <article class="card">
+    <h3>Localization at matched budget</h3>
+    <div class="headline"><span class="psi-ink">{parity.psi.display}</span> <span class="vs">vs</span> {parity.das.display}</div>
+    <p>
+      Official MIB score on MCQA, Ψ against DAS, both trained for {parity.updates.display} updates on the same model,
+      layer and rank. Ψ trains on random prompt pairs, DAS on the benchmark's curated pairs. Averaged over
+      {parity.seeds} seeds, DAS gets {parity.gap_pairs.display} more of the {parity.pairs.display} test pairs right.
+    </p>
+    <Bars title="Official score, mean and SD over seeds" rows={[
+      { label: "Ψ", value: parity.psi.value, display: parity.psi.display, tone: "psi", sd: parity.psi_sd.value },
+      { label: "DAS", value: parity.das.value, display: parity.das.display, tone: "neutral", sd: parity.das_sd.value },
+    ]} />
+  </article>
+
+  <article class="card">
+    <h3>No gold labels</h3>
+    <div class="headline"><span class="psi-ink">{noGold.unfiltered.display}</span></div>
+    <p>
+      The training targets are the model's own distributions, so Ψ can train on every prompt, including those the
+      model answers wrongly, with no answer key at any stage. Its official score is then {noGold.unfiltered.display}.
+      Using gold labels to keep only correctly answered prompts adds {noGold.drop.display} points.
+    </p>
+    <Bars title="Official score with and without the correctness filter" rows={[
+      { label: "no gold label", value: noGold.unfiltered.value, display: noGold.unfiltered.display, tone: "psi" },
+      { label: "filtered by gold", value: noGold.filtered.value, display: noGold.filtered.display, tone: "psi-soft" },
+    ]} />
+  </article>
+
+  <article class="card">
+    <h3>Natural ARC questions</h3>
+    <div class="headline"><span class="psi-ink">{arc.arms.soft.display}%</span> <span class="vs">vs</span> {arc.arms.gold.display}%</div>
+    <p>
+      On the {arc.wrong_donors.display} held-out pairs whose donor question the model answers wrongly, the edited
+      recipient gives the donor's answer in {arc.arms.soft.display}% of pairs when the subspace is trained on the
+      model's distribution. Trained on gold labels, it does so in {arc.arms.gold.display}%.
+    </p>
+    <Bars title="Agreement with a wrong donor's answer, by training target" rows={[
+      { label: "soft (Ψ)", value: arc.arms.soft.value, display: arc.arms.soft.display, tone: "psi" },
+      { label: "confidence", value: arc.arms.confidence.value, display: arc.arms.confidence.display, tone: "neutral" },
+      { label: "argmax", value: arc.arms.hard.value, display: arc.arms.hard.display, tone: "neutral" },
+      { label: "gold", value: arc.arms.gold.value, display: arc.arms.gold.display, tone: "neutral" },
+      { label: "no edit", value: arc.arms.no_edit.value, display: arc.arms.no_edit.display, tone: "trivial" },
+    ]} />
+  </article>
+
+  <article class="card">
+    <h3>Donor-free control</h3>
+    <div class="headline"><span class="psi-ink">{control.joint_conditional.display}%</span></div>
+    <p>
+      Ψ can also be asked for an answer directly, with no donor prompt. Trained jointly with its controller, it
+      realizes {control.joint_conditional.display}% of held-out requests. The same controller reaches
+      {control.frozen_das.display}% inside a frozen DAS subspace and {control.frozen_random1.display}% inside a random
+      one. Swapping in a real donor reaches {control.donor.display}%.
+    </p>
+    <Bars title="Requests realized, greedy decoding" reference={{ value: control.donor.value, label: `donor swap ${control.donor.display}` }} rows={[
+      { label: "Ψ, joint", value: control.joint_conditional.value, display: control.joint_conditional.display, tone: "psi" },
+      { label: "frozen DAS", value: control.frozen_das.value, display: control.frozen_das.display, tone: "neutral" },
+      { label: "frozen random", value: control.frozen_random1.value, display: control.frozen_random1.display, tone: "trivial" },
+    ]} />
+  </article>
+</div>
+
+<style>
+  .cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0; border-top: 1px solid var(--rule-strong); }
+  .card { padding: 30px 32px 34px; display: flex; flex-direction: column; border-bottom: 1px solid var(--rule-strong); }
+  .card:nth-child(odd) { border-right: 1px solid var(--rule-strong); padding-left: 0; }
+  .card:nth-child(even) { padding-right: 0; }
+  .card h3 { font-size: 1.35rem; text-align: center; margin-bottom: 0.5rem; }
+  .card p { color: var(--ink-soft); margin: 0.6rem 0 0; }
+  .headline { font-size: 2.7rem; line-height: 1.1; text-align: center; }
+  .headline .vs { font-size: 1.1rem; font-style: italic; color: var(--ink-muted); margin: 0 0.3rem; }
+  @media (max-width: 760px) {
+    .cards { grid-template-columns: minmax(0, 1fr); }
+    .card, .card:nth-child(odd), .card:nth-child(even) { padding: 26px 0 30px; border-right: 0; }
+    .headline { font-size: 2.2rem; }
+  }
+</style>

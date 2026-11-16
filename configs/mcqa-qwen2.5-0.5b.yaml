@@ -1,0 +1,63 @@
+# Quick start: the MCQA setting on an open 0.5B model, small enough for any
+# recent GPU. Same task and answer list as the Gemma config; the site is the
+# residual stream at layer 15, last token.
+#
+#   psi-train configs/mcqa-qwen2.5-0.5b.yaml
+seed: 11
+
+subject:
+  model: Qwen/Qwen2.5-0.5B
+  device: cuda
+  dtype: float16
+
+cut:
+  kind: residual
+  layer: 15
+  position: last_token
+
+data:
+  seed: 11
+  task: mcqa
+  variable: x_order
+  dataset: mib-bench/copycolors_mcqa
+  subset: 4_answer_choices
+  num_choices: 4
+  max_length: 64
+  counterfactuals:
+    - answerPosition
+    - randomLetter
+    - answerPosition_randomLetter
+  quality_gate: 0.7
+  cache_root: data/mib
+  record_batch_size: 64
+  batch_size: 32
+  num_workers: 0
+  mix_groups: true
+
+psi:
+  test_dim: 4
+  abstraction:
+    kind: linear
+    carrier_rank: 16
+    activation_dim: 896      # Qwen2.5-0.5B hidden size
+  transport: full_change
+  loss_weights:
+    donor: 1.0
+    nuisance: 0.25
+    calibration: 1.0
+  learning_rate: 3.0e-4
+  weight_decay: 1.0e-4
+  grad_clip: 1.0
+
+trainer:
+  max_epochs: 32
+  accelerator: auto
+  devices: 1
+
+checkpoint:
+  monitor: val/loss
+  mode: min
+  save_top_k: 1
+
+logging:
+  level: INFO

@@ -1,0 +1,75 @@
+# The paper's main MCQA setting (Section 3.1): Gemma-2 2B, residual stream at
+# layer 17, last token, rank-16 carrier. The variable is the position of the
+# correct option; the answer list is the four option symbols. Training targets
+# are the frozen model's own distribution over those symbols, on random
+# (deranged) prompt pairs, so no counterfactual label is needed.
+#
+#   psi-train configs/mcqa-gemma-2-2b.yaml --seed 11
+#
+# Gemma-2 is a gated model: accept its license on Hugging Face and log in first.
+seed: 11
+
+subject:
+  model: google/gemma-2-2b
+  device: cuda
+  dtype: float16
+
+cut:
+  kind: residual
+  layer: 17
+  position: last_token
+
+data:
+  seed: 11
+  task: mcqa
+  variable: x_order
+  dataset: mib-bench/copycolors_mcqa
+  subset: 4_answer_choices
+  num_choices: 4
+  max_length: 64
+  counterfactuals:
+    - answerPosition
+    - randomLetter
+    - answerPosition_randomLetter
+  quality_gate: 0.7          # refuse the task if the model answers fewer than 70% correctly
+  correctness_filter: true   # train on prompts the model answers correctly; false uses all prompts
+  cache_root: data/mib
+  record_batch_size: 32
+  batch_size: 16
+  num_workers: 0
+  mix_groups: true
+  donor_pairing: derangement  # random donor for every recipient
+  training_pool: all
+
+psi:
+  test_dim: 4                # size of the answer list
+  abstraction:
+    kind: linear
+    carrier_rank: 16
+    activation_dim: 2304     # Gemma-2 2B hidden size
+  transport: full_change
+  target_kind: soft          # the model's distribution; `hard` trains on its argmax
+  objective:
+    mass_mode: conditional
+  loss_weights:
+    donor: 1.0
+    nuisance: 0.0
+    calibration: 0.0
+    control: 0.0
+  learning_rate: 3.0e-4
+  weight_decay: 1.0e-4
+  grad_clip: 1.0
+
+trainer:
+  max_epochs: 32
+  accelerator: auto
+  devices: 1
+  log_every_n_steps: 1
+
+checkpoint:
+  monitor: val/loss
+  mode: min
+  save_top_k: 1
+
+logging:
+  level: INFO

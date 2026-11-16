@@ -1,0 +1,15 @@
+---
+// The swap animation alone, filling the window, for slides and recordings.
+//   ?theme=light|dark   colour theme
+//   ?pair=0|1           one pair only (default: alternate)
+//   ?t=<seconds>        a still frame at that time
+//   ?bg=none            transparent page (for PNG frames with alpha)
+import Base from "../../layouts/Base.astro";
+import Swap from "../../components/Swap.astro";
+---
+<Base title="Ψ swap" embed>
+  <script is:inline>
+    try { if (new URLSearchParams(location.search).get("bg") === "none") document.documentElement.dataset.bg = "none"; } catch (e) {}
+  </script>
+  <Swap embed />
+</Base>

@@ -1,0 +1,20 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite the paper below."
+title: "psi"
+authors:
+  - family-names: Muratore
+    given-names: Paolo
+  - family-names: Mathis
+    given-names: Mackenzie Weygandt
+repository-code: "https://github.com/AdaptiveMotorControlLab/psi"
+license: Apache-2.0
+preferred-citation:
+  type: article
+  title: "Programmable Semantic Interventions: Learning Causal Carriers from Behavioral Programs"
+  authors:
+    - family-names: Muratore
+      given-names: Paolo
+    - family-names: Mathis
+      given-names: Mackenzie Weygandt
+  year: 2026
+  journal: "arXiv preprint"

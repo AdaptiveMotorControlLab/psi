@@ -1,0 +1,16 @@
+{
+ "title": "Programmable Semantic Interventions: Learning Causal Carriers from Behavioral Programs",
+ "short": "Ψ",
+ "authors": [
+  {
+   "name": "Paolo Muratore",
+   "affiliation": "EPFL"
+  },
+  {
+   "name": "Mackenzie Weygandt Mathis",
+   "affiliation": "EPFL"
+  }
+ ],
+ "bibtex": "@article{muratore2026programmable,\n  title   = {Programmable Semantic Interventions: Learning Causal Carriers from Behavioral Programs},\n  author  = {Muratore, Paolo and Mathis, Mackenzie Weygandt},\n  journal = {arXiv preprint arXiv:XXXX.XXXXX},\n  year    = {2026}\n}",
+ "year": "2026"
+}

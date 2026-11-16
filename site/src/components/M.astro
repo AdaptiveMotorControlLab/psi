@@ -1,0 +1,7 @@
+---
+// Inline or display math: <M t={String.raw`\Psi`} /> or <M t={String.raw`...`} display />.
+import { tex } from "../scripts/tex.js";
+interface Props { t: string; display?: boolean }
+const { t, display = false } = Astro.props;
+---
+<Fragment set:html={tex(t, display)} />
