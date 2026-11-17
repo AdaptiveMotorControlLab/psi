@@ -47,8 +47,10 @@ model.save("my-carrier")
 restored = psi.PSI.load("my-carrier", device="cpu")
 ```
 
-The [quick-start notebook](notebooks/01-quickstart.ipynb) runs the same steps
-with plots, and also asks the fitted model for answers without a donor.
+On a GPU this takes a few minutes, downloads included. On a CPU, use the demos'
+`SMOKE` setting below, which shrinks the run to a size a CPU finishes. The
+[quick-start notebook](notebooks/01-quickstart.ipynb) runs the same steps with
+plots, and also asks the fitted model for answers without a donor.
 
 ## Declaring a variable
 
