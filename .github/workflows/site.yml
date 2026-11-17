@@ -1,17 +1,16 @@
 # Build site/ (Astro, static) and publish it to GitHub Pages.
 #
-# Not enabled: it runs only when started by hand from the Actions tab. To
-# publish on every push to main, add the `push` trigger below and set
-# Settings -> Pages -> Source to "GitHub Actions". The page's data is
-# committed under site/src/data, exported from the experiments reported in the
-# paper, so this job only needs Node.
+# Runs on every push to main that touches site/ or this file, and by hand from
+# the Actions tab. Needs Settings -> Pages -> Source set to "GitHub Actions".
+# The page's data is committed under site/src/data, exported from the
+# experiments reported in the paper, so this job only needs Node.
 name: project-page
 
 on:
   workflow_dispatch:
-  # push:
-  #   branches: [main]
-  #   paths: ["site/**"]
+  push:
+    branches: [main]
+    paths: ["site/**", ".github/workflows/site.yml"]
 
 permissions:
   contents: read
