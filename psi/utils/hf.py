@@ -41,7 +41,6 @@ def get_hf_model(
         model_name_or_path,
         token=token,
         cache_dir=cache_dir,
-        local_files_only=True,
     )
     tokenizer.padding_side = "left"
     tokenizer.pad_token = tokenizer.eos_token
@@ -53,7 +52,6 @@ def get_hf_model(
         dtype=dtype,
         device_map=device,
         cache_dir=cache_dir,
-        local_files_only=True,
         low_cpu_mem_usage=True,
     )
     subject.config.use_cache = False
