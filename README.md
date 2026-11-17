@@ -2,6 +2,7 @@
 
 [![Paper](https://img.shields.io/badge/arXiv-2611.21307-b31b1b.svg)](https://arxiv.org/abs/2611.21307)
 [![Website](https://img.shields.io/badge/project-page-6f42c1.svg)](https://adaptivemotorcontrollab.github.io/psi/)
+[![Demos](https://img.shields.io/badge/demos-notebooks-f37626.svg)](https://adaptivemotorcontrollab.github.io/psi/demos/)
 [![Tests](https://github.com/AdaptiveMotorControlLab/psi/actions/workflows/tests.yml/badge.svg)](https://github.com/AdaptiveMotorControlLab/psi/actions/workflows/tests.yml)
 [![License](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](LICENSE)
 
@@ -17,6 +18,132 @@ model itself, on random prompt pairs, so no counterfactual dataset and no
 ground-truth label is needed.
 
 ![PSI overview](assets/overview.png)
+
+## Install
+
+```bash
+pip install "psi[notebooks] @ git+https://github.com/AdaptiveMotorControlLab/psi"
+```
+
+Python 3.11 or later and PyTorch 2.9 or later. Models and datasets download
+from Hugging Face on first use. For development, clone the repository and run
+`pip install -e ".[dev]"`.
+
+## Quick start
+
+```python
+import psi
+
+# MIB's multiple-choice task: the variable is which option the model picks.
+prompts, program = psi.presets.mcqa(limit=64)
+model = psi.PSI("Qwen/Qwen2.5-0.5B", layer=15, rank=16, epochs=8, steering=True,
+                batch_size=8, max_length=64)
+print(program.check(model, prompts))       # does the model answer within the program?
+model.fit(prompts, program)
+print(model.score(prompts, split="test"))  # carrier swap against no edit, held out
+base, donor = prompts.splits["test"][:2]
+print(model.swap(base=base, donor=donor))  # the base's answer before and after
+model.save("my-carrier")
+restored = psi.PSI.load("my-carrier", device="cpu")
+```
+
+The [quick-start notebook](notebooks/01-quickstart.ipynb) runs the same steps
+with plots, and also asks the fitted model for answers without a donor.
+
+## Declaring a variable
+
+A program has two parts: the **answers** the variable can produce, and the
+**rule** for what the model should answer after an interchange.
+
+### Answers
+
+There are two kinds, and they mean different things even on the same prompts.
+
+- `psi.Values([" France", " Japan", ...])` gives every prompt the same list.
+  The variable's value is the answer itself.
+- `psi.Slots("choices.label")` gives each prompt its own options, read from a
+  column. The variable's value is the slot: the first option, the second, and so
+  on. Every prompt needs the same number of options.
+
+Take a base prompt whose options are labelled `W X Y Z`, where the model
+answers `X`, and a donor whose options are `A B C D`, where the model answers
+`C`. Under the rule `"copy"`:
+
+| Declaration | The base should now answer |
+|---|---|
+| `Values([" A", " B", ..., " Z"])`: which letter | `C`, the donor's letter |
+| `Slots("choices.label")`: which position | `Y`. The donor chose its third option, and the base's third option is Y |
+
+Answers are used verbatim as continuations of the prompt, so a leading space
+usually belongs in them (`" A"`). An answer may span several tokens; it is
+scored by its summed log-probability.
+
+### Rules
+
+| Rule | After an interchange the base should |
+|---|---|
+| `"copy"` | take the donor's value |
+| `"keep"` | keep its own answer (a control) |
+| `psi.Gated("column")` | copy on prompts where the boolean column is true, keep elsewhere |
+| `psi.Table({0: 1, 1: 0})` | answer the slot the table assigns to the donor's slot |
+
+### Prompts
+
+```python
+prompts = psi.Prompts(texts, columns={"gold": gold_answers})   # at least six prompts
+prompts = psi.Prompts.from_pandas(frame, text="prompt")
+prompts = psi.Prompts.from_hf("mib-bench/copycolors_mcqa", "4_answer_choices",
+                              text="prompt", options="choices.label", gold="answerKey")
+program = psi.Program(psi.Values([" A", " B"]), rule="copy")
+```
+
+Splits come from the dataset, or from a seeded 80/10/10 assignment. The site is
+the last token by default; `PSI(..., position=psi.At(r"regex"))` reads the last
+token of the first match instead. A gold column is optional and only used for
+evaluation, the correctness filter or `target="gold"`.
+
+`program.check(model, prompts)` runs before any training. It reports how much
+probability the model puts on the declared answers, how often it picks each,
+its agreement with gold when there is a gold column, and the mass of the
+answers with a leading space added or removed. Low mass means the program does
+not match how this model answers.
+
+`psi.scan_layers(model_id, prompts, program, layers=[7, 15, 23])` fits briefly
+at each layer and scores the validation split, which is how to choose `layer`.
+Score the chosen layer on test afterwards.
+[Your own variable](notebooks/02-your-own-variable.ipynb) does this with prompts
+written in the notebook.
+
+## What a fitted model does
+
+| Call | Returns |
+|---|---|
+| `score(prompts, split="test")` | interchange agreement against its no-edit baseline, model agreement, answer mass, and steering success when trained with `steering=True` |
+| `swap(base=..., donor=...)` | both prompts' answers, and the base's answer after receiving the donor's carrier |
+| `reading(prompt)` | the model's distribution over the program's answers |
+| `steer(prompt, answer=...)` | the answer after writing a requested value into the carrier; needs `steering=True` |
+| `save(path)`, `PSI.load(path)` | a directory with `psi.json` (model, revision, site, program, settings) and `weights.safetensors` |
+| `push_to_hub(repo)`, `PSI.from_pretrained(repo)` | the same directory on the Hugging Face Hub |
+
+Every success rate is an argmax over the declared answers. Interchange agreement
+compares with the pair targets and averages counterfactual families equally.
+Model agreement applies the rule to the frozen model's own readings; the two
+differ where the model's answer differs from gold.
+
+The estimator supports residual-stream sites of causal language models. A
+loaded model can be passed directly: `PSI(model, tokenizer=tokenizer, layer=...)`.
+
+## Demos
+
+| Notebook | What it shows | |
+|---|---|---|
+| [Learn a carrier, swap it and steer it](notebooks/01-quickstart.ipynb) | an option-position variable on Qwen2.5-0.5B: check, fit, score, donor swaps and requested answers | [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/AdaptiveMotorControlLab/psi/blob/main/notebooks/01-quickstart.ipynb) |
+| [Declare a letter-copy variable](notebooks/02-your-own-variable.ipynb) | prompts generated in Python, an answer-mass check and a layer scan | [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/AdaptiveMotorControlLab/psi/blob/main/notebooks/02-your-own-variable.ipynb) |
+
+Each notebook installs the package, downloads what it needs, and ships with
+the outputs of a full run. Setting `SMOKE = True` in its configuration cell gives a
+small run that finishes on a CPU. The rendered notebooks are on the
+[project page](https://adaptivemotorcontrollab.github.io/psi/demos/).
 
 ## Results
 
@@ -51,18 +178,9 @@ and on natural ARC science questions.
 
 ![Control](assets/control.png)
 
-## Installation
+## Command line
 
-Python 3.11 or later and PyTorch 2.9 or later. A GPU is needed for the models
-in the example configs.
-
-```bash
-git clone https://github.com/AdaptiveMotorControlLab/psi.git
-cd psi
-pip install -e .
-```
-
-## Quick start
+The paper's runs use YAML configs and the `psi-train` command:
 
 ```bash
 psi-train configs/mcqa-qwen2.5-0.5b.yaml
@@ -96,6 +214,26 @@ gated model: accept its license on Hugging Face and log in
 | `configs/mcqa-gemma-2-2b.yaml` | MIB multiple choice, Gemma-2 2B, layer 17 (paper, Section 3.1) |
 | `configs/arc-gemma-2-2b.yaml` | natural ARC questions, unfiltered, 768 updates (paper, Section 3.2) |
 
+A program can also be declared in a config, with `data.task: program`:
+
+```yaml
+data:
+  task: program
+  dataset: mib-bench/copycolors_mcqa
+  subset: 4_answer_choices
+  text: prompt
+  answers: {slots: choices.label}      # or {values: [" A", " B"]}
+  rule: copy
+  gold: answerKey
+  max_length: 64
+  cache_root: data/psi
+  batch_size: 8
+  num_workers: 0
+```
+
+This route uses the column's strings exactly as stored; the Python preset
+`psi.presets.mcqa` adds the leading spaces the paper's program uses.
+
 ## Configuration
 
 A config has one block per part of the method.
@@ -112,9 +250,9 @@ Fields of `psi` you are most likely to change:
 
 | Field | Values |
 |---|---|
-| `test_dim` | number of answers in the program; must equal the task's |
+| `test_dim` | number of answers in the program; inferred from the task when omitted |
 | `abstraction.carrier_rank` | rank of the subspace |
-| `abstraction.activation_dim` | hidden size of the model at the cut |
+| `abstraction.activation_dim` | hidden size of the model at the cut; inferred from the model when omitted |
 | `target_kind` | `soft`, the model's distribution over the answers (PSI); `hard`, its argmax; `gold`, the dataset's label |
 | `objective.mass_mode` | `full`, `conditional` or `reference`: how the loss treats probability mass outside the declared answers |
 | `transport` | the program's rule for the answer after an interchange: `full_change` takes the donor's, `no_change` keeps the recipient's, `gated_change` and `table` choose per pair from a gate the task provides |
@@ -124,58 +262,22 @@ Fields of `data`: `correctness_filter: false` trains on every prompt instead of
 those the model answers correctly; `donor_pairing` is `derangement` (a random
 donor for each prompt) or `curated` (the dataset's own counterfactual pairs).
 
-## Tasks
+## Built-in tasks
 
 | `data.task` | Variables | Positions |
 |---|---|---|
+| `program` | declared in the config | `last_token` by default |
 | `mcqa` | `x_order`, `o_answer` | `last_token`, `correct_symbol`, `correct_symbol_period` |
 | `arc` | `x_order`, `o_answer` | `last_token`, `correct_symbol` |
 | `arithmetic` | `x_carry` | `op2_last`, `last` |
 | `ravel` | `a_country`, `a_continent`, `a_language` | `last_token`, `entity_last_token` |
 | `ioi` | `output_position`, `output_token` | `all` |
 
-Any dataset with the fields the multiple-choice task reads (`prompt`,
-`choices.label`, `answerKey`, and one `<name>_counterfactual` column per entry
-of `data.counterfactuals`) runs by changing `data.dataset`.
-
-## Applying PSI to a new task
-
-A task is a subclass of `TaskPreparation` (`psi/data/task.py`). It names its
-variables and token positions, says how many answers the program has, and
-implements three steps:
-
-| Method | Returns |
-|---|---|
-| `_prepare_input(raw_split)` | tokenized prompts, what each prompt's answer is, and prompt pairs |
-| `_prepare_activations(inputs, subject, observations)` | the activations at the cut |
-| `_prepare_outcomes(inputs, subject, observations, pairs)` | the answer list as token ids, the model's reading of it, and the targets |
-
-`materialize` runs these once and caches the result. `psi/data/tasks/arc.py`
-is the smallest example, a new dataset on top of the multiple-choice
-preparation; `psi/data/tasks/mcqa.py` is a complete one. The data types are in
-`psi/data/types.py`.
-
-`psi-train` resolves `data.task` from the built-in tasks. A task of your own
-trains through the Python API:
-
-```python
-import yaml
-from lightning import Trainer
-
-from psi.data import get_datamodule
-from psi.model import get_subject
-from psi.psi import ProgrammableSemanticIntervention
-
-from my_task import MyTask
-
-config = yaml.safe_load(open("my-task.yaml"))
-tokenizer, subject = get_subject(config)
-task = MyTask(config["data"], tokenizer)
-
-data = get_datamodule(config["data"], task.materialize(subject))
-model = ProgrammableSemanticIntervention.from_config(config["psi"], subject)
-Trainer(**config["trainer"]).fit(model, datamodule=data)
-```
+A task with its own preparation is a subclass of `TaskPreparation`
+(`psi/data/task.py`) that implements `_prepare_input`, `_prepare_activations`
+and `_prepare_outcomes`. `psi/data/tasks/arc.py` is the smallest example and
+`psi/data/tasks/mcqa.py` a complete one. Most new variables need only `Prompts`
+and `Program`.
 
 ## Tests
 

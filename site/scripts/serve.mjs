@@ -12,10 +12,14 @@ const types = {
 };
 
 export function serve(port = 0) {
+  const base = (process.env.SITE_BASE || "").replace(/\/$/, "");
   const server = createServer(async (req, res) => {
     try {
-      let file = path.join(root, decodeURIComponent(new URL(req.url, "http://x").pathname));
-      if (!file.startsWith(root)) throw new Error("outside dist");
+      let pathname = decodeURIComponent(new URL(req.url, "http://x").pathname);
+      if (base && pathname.startsWith(base + "/")) pathname = pathname.slice(base.length);
+      else if (base && pathname === base) pathname = "/";
+      let file = path.resolve(root, "." + pathname);
+      if (file !== root && !file.startsWith(root + path.sep)) throw new Error("outside dist");
       if ((await stat(file).catch(() => null))?.isDirectory()) file = path.join(file, "index.html");
       const body = await readFile(file);
       res.writeHead(200, { "content-type": types[path.extname(file)] ?? "application/octet-stream" });
@@ -25,5 +29,5 @@ export function serve(port = 0) {
     }
   });
   return new Promise((resolve) => server.listen(port, "127.0.0.1", () =>
-    resolve({ url: `http://127.0.0.1:${server.address().port}`, close: () => server.close() })));
+    resolve({ url: `http://127.0.0.1:${server.address().port}${base}`, close: () => server.close() })));
 }

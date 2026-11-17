@@ -10,7 +10,7 @@ on:
   workflow_dispatch:
   push:
     branches: [main]
-    paths: ["site/**", ".github/workflows/site.yml"]
+    paths: ["site/**", "notebooks/**", ".github/workflows/site.yml"]
 
 permissions:
   contents: read

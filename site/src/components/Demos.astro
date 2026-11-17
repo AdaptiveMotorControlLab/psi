@@ -1,0 +1,119 @@
+---
+import { getNotebooks } from "../lib/notebooks.mjs";
+import DemoChart from "./DemoChart.astro";
+const notebooks = await getNotebooks();
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+---
+
+<div class="demo-grid">
+  {notebooks.map((notebook) => (
+    <article class="demo-card">
+      <a
+        class="demo-image"
+        href={`${base}/demos/${notebook.slug}/`}
+        aria-label={`Read ${notebook.title}`}
+      >
+        {notebook.card ? (
+          <DemoChart card={notebook.card} title={notebook.title} />
+        ) : (
+          notebook.image && (
+            <img
+              src={`${base}${notebook.image}`}
+              alt={`Computed output from ${notebook.title}`}
+            />
+          )
+        )}
+      </a>
+      <div class="demo-copy">
+        <h3>
+          <a href={`${base}/demos/${notebook.slug}/`}>{notebook.title}</a>
+        </h3>
+        <p>{notebook.description}</p>
+        <p class="demo-runtime">
+          {notebook.model}
+          <br />
+          {notebook.gpu} · {notebook.runtime}
+          {notebook.smoke ? " · CPU smoke run" : ""}
+        </p>
+        <div class="demo-actions">
+          <a class="button" href={notebook.colab}>
+            Open in Colab
+          </a>
+          <a class="button" href={`${base}/demos/${notebook.slug}/`}>
+            Read
+          </a>
+          <a class="button" href={notebook.github}>
+            GitHub
+          </a>
+        </div>
+      </div>
+    </article>
+  ))}
+</div>
+<style>
+  .demo-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+  }
+  .demo-card {
+    min-width: 0;
+    border: 1px solid var(--rule-strong);
+    display: flex;
+    flex-direction: column;
+  }
+  .demo-image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 14px 18px 10px;
+    border-bottom: 1px solid var(--rule);
+    aspect-ratio: 1.8;
+    overflow: hidden;
+  }
+  .demo-image:has(img) {
+    background: white;
+  }
+  .demo-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+  .demo-copy {
+    padding: 22px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+  h3 {
+    font-size: 1.4rem;
+  }
+  h3 a {
+    color: var(--ink);
+    text-decoration: none;
+  }
+  p {
+    margin: 0.6rem 0;
+    color: var(--ink-soft);
+  }
+  .demo-runtime {
+    overflow-wrap: anywhere;
+    font-size: 0.85rem;
+    margin-top: auto;
+    padding-top: 0.5rem;
+  }
+  .demo-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 12px;
+  }
+  .button {
+    font-size: 0.85rem;
+  }
+  @media (max-width: 700px) {
+    .demo-grid {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+</style>

@@ -1,0 +1,30 @@
+---
+import Base from "../../layouts/Base.astro";
+import Demos from "../../components/Demos.astro";
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+---
+
+<Base
+  title="PSI demos"
+  description="Runnable notebooks for declaring variables, learning carriers and steering model answers."
+>
+  <main class="wrap demo-index">
+    <a href={`${base}/`}>← PSI project page</a>
+    <h1>Demos</h1>
+    <p>Read each notebook with its computed outputs, or run it in Colab.</p>
+    <Demos />
+  </main>
+</Base>
+<style>
+  .demo-index {
+    padding-top: 40px;
+    padding-bottom: 80px;
+  }
+  h1 {
+    margin: 1.4rem 0 0.5rem;
+  }
+  p {
+    color: var(--ink-soft);
+    margin-bottom: 2rem;
+  }
+</style>

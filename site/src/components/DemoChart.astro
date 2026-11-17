@@ -1,0 +1,65 @@
+---
+// A demo's held-out scores, drawn at build time in the page's own colours so the
+// card follows the light and dark themes. Each row puts the carrier swap next to
+// no edit on a 0 to 100% axis, with both values in a column on the right. The
+// numbers come from the notebook's run record.
+interface Row { label: string; edit: number; baseline: number }
+interface Props { card: { metric: string; rows: Row[]; pairs?: number }; title: string }
+const { card, title } = Astro.props;
+const W = 380, labelW = 128, valueW = 84, rowH = 30, top = 30;
+const plotEnd = W - valueW - 12;
+const x = (v: number) => labelW + (plotEnd - labelW) * v;
+const H = top + card.rows.length * rowH + 34;
+const pct = (v: number) => `${Math.round(100 * v)}%`;
+const caption = `${card.metric}${card.pairs ? `, ${card.pairs} pairs` : ""}`;
+---
+<svg class="demo-chart" viewBox={`0 0 ${W} ${H}`} role="img" aria-label={`${title}: ${caption}`}>
+  <title>{`${title}: ${caption}`}</title>
+  <g class="legend" transform={`translate(${labelW}, 11)`}>
+    <circle cx="5" cy="0" r="4.5" class="dot-baseline" />
+    <text x="15" y="4">No edit</text>
+    <circle cx="80" cy="0" r="5.5" class="dot-edit" />
+    <text x="91" y="4">Carrier swap</text>
+  </g>
+  {[0, 0.5, 1].map((t) => (
+    <g>
+      <line x1={x(t)} x2={x(t)} y1={top - 4} y2={top + card.rows.length * rowH - 6} class="grid" />
+      <text x={x(t)} y={top + card.rows.length * rowH + 8} class="tick" text-anchor="middle">{pct(t)}</text>
+    </g>
+  ))}
+  {card.rows.map((r, i) => {
+    const y = top + i * rowH + rowH / 2 - 4;
+    const same = Math.abs(r.edit - r.baseline) < 0.005;
+    return (
+      <g>
+        <text x={labelW - 12} y={y + 4} class="row-label" text-anchor="end">{r.label}</text>
+        <line x1={x(Math.min(r.edit, r.baseline))} x2={x(Math.max(r.edit, r.baseline))} y1={y} y2={y} class="span" />
+        <circle cx={x(r.baseline)} cy={y} r="4.5" class="dot-baseline" />
+        <circle cx={x(r.edit)} cy={y} r="5.5" class="dot-edit" />
+        {same && <circle cx={x(r.edit)} cy={y} r="8" class="ring" />}
+        <text x={W - valueW + 4} y={y + 4} class="values">
+          <tspan class="value-edit">{pct(r.edit)}</tspan>
+          <tspan class="value-baseline" dx="5">{`vs ${pct(r.baseline)}`}</tspan>
+        </text>
+      </g>
+    );
+  })}
+  <text x={labelW} y={H - 4} class="caption">{caption}</text>
+</svg>
+
+<style>
+  .demo-chart { display: block; width: 100%; height: auto; }
+  .demo-chart text { font-family: var(--serif); }
+  .legend text { font-size: 11.5px; fill: var(--ink-soft); }
+  .grid { stroke: var(--rule); stroke-width: 0.8; }
+  .tick { font-size: 10px; fill: var(--ink-muted); }
+  .row-label { font-size: 12.5px; font-style: italic; fill: var(--ink-soft); }
+  .span { stroke: var(--psi); stroke-opacity: 0.35; stroke-width: 3; stroke-linecap: round; }
+  .dot-baseline { fill: var(--bg); stroke: var(--ink-muted); stroke-width: 1.4; }
+  .dot-edit { fill: var(--psi); }
+  .ring { fill: none; stroke: var(--ink-muted); stroke-width: 1.2; }
+  .values { font-size: 12.5px; }
+  .value-edit { fill: var(--psi-ink); }
+  .value-baseline { fill: var(--ink-muted); font-size: 11px; }
+  .caption { font-size: 10.5px; font-style: italic; fill: var(--ink-muted); }
+</style>

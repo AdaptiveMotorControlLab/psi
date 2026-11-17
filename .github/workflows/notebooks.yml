@@ -1,0 +1,47 @@
+name: notebook-smoke
+on:
+  workflow_dispatch:
+  push:
+    paths: ["notebooks/**", "psi/**", ".github/workflows/notebooks.yml"]
+  schedule:
+    - cron: "17 5 * * 1"
+permissions:
+  contents: read
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    env:
+      CUDA_VISIBLE_DEVICES: ""
+      MPLBACKEND: Agg
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install CPU notebook dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install torch --index-url https://download.pytorch.org/whl/cpu
+          pip install -e '.[notebooks,dev]'
+      - name: Prepare temporary CPU copies
+        run: |
+          python - <<'PY'
+          import os
+          from pathlib import Path
+          import nbformat
+
+          output = Path(os.environ["RUNNER_TEMP"]) / "psi-smoke"
+          output.mkdir(parents=True, exist_ok=True)
+
+          for source in Path("notebooks").glob("*.ipynb"):
+              notebook = nbformat.read(source, as_version=4)
+              for cell in notebook.cells:
+                  if cell.cell_type == "code" and cell.source.lstrip().startswith("%pip install"):
+                      cell.source = 'print("Using the checked-out PSI package.")'
+                      cell.outputs = []
+                  if "parameters" in cell.metadata.get("tags", []):
+                      cell.source = cell.source.replace("SMOKE = False", "SMOKE = True")
+              nbformat.write(notebook, output / source.name)
+          PY
+      - name: Execute temporary copies
+        run: python -m pytest --nbmake --nbmake-timeout=1800 "$RUNNER_TEMP/psi-smoke/"

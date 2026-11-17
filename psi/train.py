@@ -76,11 +76,29 @@ def run_training(
     tokenizer, subject = get_subject(config)
     task = get_task(config["data"], tokenizer)
     hyperparameters = psi_config(config)
+    abstraction = hyperparameters.get("abstraction")
+    infer_activation = (
+        abstraction is not None
+        and abstraction.get("kind", "linear") == "linear"
+        and "activation_dim" not in abstraction
+    )
+    inferred = "test_dim" not in hyperparameters or infer_activation
+    hyperparameters.setdefault("test_dim", task.num_outcomes)
+    if infer_activation:
+        hyperparameters["abstraction"] = dict(
+            abstraction,
+            activation_dim=subject.model.config.hidden_size,
+        )
     if hyperparameters["test_dim"] != task.num_outcomes:
         raise ValueError(
             f"test_dim={hyperparameters['test_dim']} disagrees with "
             f"the task's {task.num_outcomes} outcomes."
         )
+    if inferred and not dry_run:
+        resolved = dict(config)
+        resolved["psi"] = hyperparameters
+        with (run_dir / "resolved.yaml").open("w") as handle:
+            yaml.safe_dump(resolved, handle, sort_keys=False)
     data = task.materialize(subject)
     dm = get_datamodule(config["data"], data)
     psi = ProgrammableSemanticIntervention.from_config(hyperparameters, subject)

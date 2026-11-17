@@ -15,6 +15,9 @@ def get_task(config: dict[str, Any], tokenizer: TokenizersBackend) -> "TaskPrepa
 
     task_name = config["task"]
     match task_name:
+        case "program":
+            from psi.data.tasks.program import ProgramTask
+            return ProgramTask(config, tokenizer)
         case "mcqa":
             from psi.data.tasks.mcqa import MCQATask
             return MCQATask(config, tokenizer)

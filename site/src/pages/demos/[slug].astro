@@ -1,0 +1,215 @@
+---
+import Base from "../../layouts/Base.astro";
+import { Code } from "astro:components";
+import { getNotebooks } from "../../lib/notebooks.mjs";
+export async function getStaticPaths() {
+  return (await getNotebooks()).map((notebook) => ({
+    params: { slug: notebook.slug },
+    props: { notebook },
+  }));
+}
+const { notebook } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+---
+
+<Base title={`${notebook.title} · PSI`} description={notebook.description}>
+  <main class="wrap notebook">
+    <nav class="notebook-nav" aria-label="Notebook links">
+      <a href={`${base}/demos/`}>← All demos</a>
+      <a class="button" href={notebook.colab}>
+        Open in Colab
+      </a>
+      <a class="button" href={notebook.github}>
+        GitHub
+      </a>
+      <div class="theme seg" role="group" aria-label="Colour theme">
+        <button type="button" data-theme-choice="light">
+          light
+        </button>
+        <button type="button" data-theme-choice="dark">
+          dark
+        </button>
+      </div>
+    </nav>
+    <p class="run-record">
+      {notebook.model} · {notebook.gpu} · {notebook.runtime}
+    </p>
+    {notebook.cells.map((cell) =>
+      cell.type === "markdown" ? (
+        <section class="notebook-prose" set:html={cell.html} />
+      ) : (
+        <section class="notebook-code">
+          <Code code={cell.source} lang="python" themes={{ light: "github-light", dark: "github-dark" }} defaultColor={false} />
+          {cell.outputs.map((output) => (
+            <div
+              class:list={[
+                "notebook-output",
+                { "output-image": output.type === "image" },
+              ]}
+            >
+              {output.type === "image" ? (
+                <img
+                  src={`${base}${output.src}`}
+                  alt="Computed notebook figure"
+                  loading="lazy"
+                />
+              ) : output.type === "html" ? (
+                <div class="output-table" set:html={output.html} />
+              ) : (
+                <pre>{output.text}</pre>
+              )}
+            </div>
+          ))}
+        </section>
+      ),
+    )}
+  </main>
+</Base>
+<script>
+  document
+    .querySelectorAll<HTMLButtonElement>("[data-theme-choice]")
+    .forEach((button) => {
+      button.addEventListener("click", () => {
+        const theme = button.dataset.themeChoice!;
+        document.documentElement.dataset.theme = theme;
+        try {
+          localStorage.setItem("psi-theme", theme);
+        } catch {}
+        document
+          .querySelectorAll<HTMLButtonElement>("[data-theme-choice]")
+          .forEach((choice) =>
+            choice.setAttribute(
+              "aria-pressed",
+              String(choice.dataset.themeChoice === theme),
+            ),
+          );
+      });
+      button.setAttribute(
+        "aria-pressed",
+        String(
+          button.dataset.themeChoice === document.documentElement.dataset.theme,
+        ),
+      );
+    });
+</script>
+<style>
+  .notebook {
+    max-width: 1000px;
+    padding-top: 32px;
+    padding-bottom: 80px;
+    min-width: 0;
+  }
+  .notebook-nav {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  .run-record {
+    color: var(--ink-soft);
+    overflow-wrap: anywhere;
+    font-size: 0.9rem;
+  }
+  .notebook-prose {
+    margin: 2rem 0 1rem;
+    overflow-wrap: anywhere;
+  }
+  .notebook-prose :global(h1) {
+    font-size: clamp(1.8rem, 5vw, 2.6rem);
+    margin-bottom: 1.2rem;
+  }
+  .notebook-prose :global(p) {
+    margin-bottom: 0.8rem;
+  }
+  .notebook-prose :global(img) {
+    max-width: 100%;
+  }
+  .notebook-prose :global(.katex-display) {
+    overflow-x: auto;
+    overflow-y: hidden;
+  }
+  .notebook-code {
+    min-width: 0;
+    margin: 1.2rem 0 2rem;
+  }
+  .notebook-code :global(pre.astro-code) {
+    padding: 20px;
+    font-size: 0.85rem;
+    overflow-x: auto;
+    border: 1px solid var(--rule-strong);
+    background: var(--hover);
+  }
+  /* Code follows the page theme: dark by default, light on request. */
+  .notebook-code :global(pre.astro-code),
+  .notebook-code :global(pre.astro-code span) {
+    color: var(--shiki-dark);
+  }
+  :global(:root[data-theme="light"]) .notebook-code :global(pre.astro-code),
+  :global(:root[data-theme="light"]) .notebook-code :global(pre.astro-code span) {
+    color: var(--shiki-light);
+  }
+  .notebook-output {
+    margin: 10px 0;
+    min-width: 0;
+  }
+  .notebook-output pre {
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    font-size: 0.85rem;
+    padding: 16px;
+    border: 1px solid var(--rule);
+  }
+  .figure-hint {
+    display: none;
+  }
+  .output-image {
+    background: white;
+    padding: 12px;
+  }
+  :global(:root:not([data-theme="light"])) .output-image {
+    background: var(--bg);
+  }
+  :global(:root:not([data-theme="light"])) .output-image img {
+    filter: invert(1) hue-rotate(180deg);
+  }
+  .output-image img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+  }
+  .output-table {
+    max-width: 100%;
+    overflow-x: auto;
+  }
+  .output-table :global(table) {
+    border-collapse: collapse;
+    font-size: 0.85rem;
+    width: max-content;
+    min-width: 100%;
+  }
+  .output-table :global(th),
+  .output-table :global(td) {
+    border: 1px solid var(--rule-strong);
+    padding: 8px 10px;
+    text-align: left;
+    max-width: 420px;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+  }
+  @media (max-width: 700px) {
+    .output-image {
+      overflow-x: auto;
+    }
+    .output-image img {
+      width: 960px;
+      max-width: none;
+    }
+    .figure-hint {
+      display: block;
+      color: var(--ink-muted);
+      font-size: 0.75rem;
+      margin-bottom: 0.5rem;
+    }
+  }
+</style>
