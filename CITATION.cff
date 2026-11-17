@@ -17,4 +17,6 @@ preferred-citation:
     - family-names: Mathis
       given-names: Mackenzie Weygandt
   year: 2026
-  journal: "arXiv preprint"
+  journal: "arXiv preprint arXiv:2611.21307"
+  url: "https://arxiv.org/abs/2611.21307"
+  doi: "10.48550/arXiv.2611.21307"

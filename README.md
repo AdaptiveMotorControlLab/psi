@@ -1,6 +1,6 @@
 # Ψ: Programmable Semantic Interventions
 
-[![Paper](https://img.shields.io/badge/arXiv-XXXX.XXXXX-b31b1b.svg)](https://arxiv.org/abs/XXXX.XXXXX)
+[![Paper](https://img.shields.io/badge/arXiv-2611.21307-b31b1b.svg)](https://arxiv.org/abs/2611.21307)
 [![Website](https://img.shields.io/badge/project-page-6f42c1.svg)](https://adaptivemotorcontrollab.github.io/psi/)
 [![Tests](https://github.com/AdaptiveMotorControlLab/psi/actions/workflows/tests.yml/badge.svg)](https://github.com/AdaptiveMotorControlLab/psi/actions/workflows/tests.yml)
 [![License](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](LICENSE)
@@ -189,10 +189,10 @@ The tests run on CPU and download nothing.
 ## Citation
 
 ```bibtex
-@article{muratore2026psi,
+@article{muratore2026programmable,
   title   = {Programmable Semantic Interventions: Learning Causal Carriers from Behavioral Programs},
   author  = {Muratore, Paolo and Mathis, Mackenzie Weygandt},
-  journal = {arXiv preprint arXiv:XXXX.XXXXX},
+  journal = {arXiv preprint arXiv:2611.21307},
   year    = {2026}
 }
 ```

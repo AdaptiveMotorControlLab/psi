@@ -11,6 +11,6 @@
    "affiliation": "EPFL"
   }
  ],
- "bibtex": "@article{muratore2026programmable,\n  title   = {Programmable Semantic Interventions: Learning Causal Carriers from Behavioral Programs},\n  author  = {Muratore, Paolo and Mathis, Mackenzie Weygandt},\n  journal = {arXiv preprint arXiv:XXXX.XXXXX},\n  year    = {2026}\n}",
+ "bibtex": "@article{muratore2026programmable,\n  title   = {Programmable Semantic Interventions: Learning Causal Carriers from Behavioral Programs},\n  author  = {Muratore, Paolo and Mathis, Mackenzie Weygandt},\n  journal = {arXiv preprint arXiv:2611.21307},\n  year    = {2026}\n}",
  "year": "2026"
 }
